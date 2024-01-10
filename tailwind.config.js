@@ -6,12 +6,13 @@ module.exports = {
     extend: {
     },
     fontFamily: {
-      body: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+      body: ' Montserrat, Varino',
       heading:
-        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-      sans: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-      serif: 'Georgia, Cambria, "Times New Roman", Times, serif',
-      mono: 'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+        'Montserrat,Varino',
+      sans: 'Montserrat, Varino',
+      serif: 'Montserrat, Varino ',
+      mono: 'Varino',
+
     },
   },
   variants: {

@@ -4,25 +4,40 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 // Importez les composants associés à chaque route
 import Home from './views/Home.vue';
-import Restaurant from './views/Restaurant.vue';
-import Repas from './views/Repas.vue';
-import Reservation from './views/Reservation.vue';
-import Commande from './views/Commande.vue';
-import RestaurantDetail from './views/RestaurantDetail.vue';
+import Blog from './views/Blog.vue';
+import Motivation from './views/Motivation.vue';
+import SalleReseau from './views/SalleReseau.vue';
+import Video from './views/Video.vue';
+import Propos from './views/Propos.vue';
+import SalleDefence from './views/SalleDefence.vue';
 import LoginForm from './views/LoginForm.vue';
+import Contact from './views/Contact.vue';
 import RegisterFrom from './views/RegisterFrom.vue';
-
+import BlogDetail from './views/BlogDetail.vue';
+import LoginLayout from './layouts/LoginLayout.vue';
+import RegisterLayout from './layouts/RegisterLayout.vue';
 
 
 const routes = [
   { path: '/', component: Home },
-  { path: '/restaurant', component: Restaurant },
-  { path: '/repas', component: Repas },
-  { path: '/reservation', component: Reservation },
-  { path: '/commande', component: Commande },
-  { path: '/restaurantdetail', component: RestaurantDetail },
-  { path: '/auth/login', component: LoginForm },
-  { path: '/auth/register', component: RegisterFrom },
+  { path: '/blog', component: Blog },
+  { path: '/contact', component: Contact },
+  { path: '/motivation', component: Motivation },
+  { path: '/sallereseau', component: SalleReseau },
+  { path: '/video', component: Video },
+  { path: '/blogplus', component: BlogDetail },
+  { path: '/salledefence', component: SalleDefence },
+  { path: '/propos', component: Propos },
+  {
+    path: '/auth/login',
+    component: LoginForm,
+    meta: { layout: LoginLayout, public: false },
+  },
+  {
+    path: '/auth/register',
+    component: RegisterFrom,
+    meta: { layout: RegisterLayout, public: false }
+  },
 ];
 
 const router = createRouter({

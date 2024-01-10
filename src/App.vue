@@ -1,8 +1,18 @@
 <template>
-  <Navbar />
-  <router-view></router-view>
-  
-  <Footer />
+  <div v-if="$route.meta.layout">
+    <!-- Pour afficher le contenu de la page actuelle -->
+    <component :is="$route.meta.layout">
+      <router-view />
+      <!-- Pour afficher le contenu de la page spécifique au modèle de mise en page -->
+    </component>
+  </div>
+  <div v-else>
+    <Navbar />
+    <router-view />
+    <!-- Pour afficher le contenu de la page actuelle -->
+
+    <Footer />
+  </div>
 </template>
 
 <script>
@@ -16,20 +26,20 @@ export default {
   components: {
     //HelloWorld,
     Navbar,
-    Footer,
-   
-    
+    Footer,  
   }
+  
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /**font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #2c3e50;*/
  
 }
+
 </style>

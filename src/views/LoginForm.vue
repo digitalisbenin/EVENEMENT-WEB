@@ -25,9 +25,9 @@ export default {
 };
 </script>
 
-<template>
+<template class="">
   <div class="p-6 space-y-4 md:space-y-6 sm:p-8 w-1/3 mx-auto my-auto mt-4 mb-4 box-shadow-all-sides">
-    <h1 class="font-bold text-xl">Se connecter</h1>
+    <h1 class="font-bold text-xl text-white">Se connecter</h1>
     <form
       method="POST"
       action="#"
@@ -35,7 +35,7 @@ export default {
       @submit.prevent="login()"
     >
       <div class="">
-        <label class="block font-bold text-sm text-gray-700 text-left">Email</label>
+        <label class="block font-bold text-sm text-white text-left">Email</label>
         <div class="mt-1">
           <input
           class="block w-full p-2 border border-input-disable rounded-md focus:outline-none focus:ring-primary-normal focus:ring focus:ring-opacity-50 shadow-sm focus:border"
@@ -45,8 +45,9 @@ export default {
           />
         </div>
       </div>
+      
       <div class="space-y-1 mt-5">
-        <label class="block font-bold text-sm text-gray-700 text-left">Password</label>
+        <label class="block font-bold text-sm text-white text-left">Password</label>
         <div class="mt-1">
           <input
           class="block w-full p-2 border border-input-disable rounded-md focus:outline-none focus:ring-primary-normal focus:ring focus:ring-opacity-50 shadow-sm focus:border"
@@ -67,14 +68,14 @@ export default {
             />
           </div>
           <div class="ml-1 text-sm">
-            <label for="remember" class="text-sm font-medium text-primary-normal dark:text-gray-300 ">Se souvenir de moi
+            <label for="remember" class="text-sm font-medium text-white dark:text-gray-300 ">Se souvenir de moi
             </label>
           </div>
         </div>
 
         <a
           href="/auth/forgot-password"
-          class="text-sm font-medium text-primary-normal hover:underline dark:text-primary-500"
+          class=" bg-blue-500 rounded-full px-4 text-sm font-medium text-black hover:underline dark:text-primary-500"
         >
           Mot de passe oublie
         </a>
@@ -82,20 +83,20 @@ export default {
 
       <Button
         type="submit"
-        class="bg-green-600 text-white px-8 py-2 focus:outline-none poppins rounded-full mt-24 transform transition duration-300 hover:scale-105"
+        class="bg-blue-500 text-white px-8 py-2 focus:outline-none poppins rounded-full mt-24 transform transition duration-300 hover:scale-105"
        
       >
         
         Connexion
       </Button>
     </form>
-    <p class="text-sm text-gray-500">
+    <p class="text-sm text-white ">
       Pas encore de compte
-      <a
-        href="/auth/register"
-        class="font-sans text-blue-700 hover:underline dark:text-primary-500"
+      <router-link to="/auth/register"
+        
+        class="bg-blue-500 rounded-full px-4 font-sans text-black ml-4 hover:underline dark:text-primary-500"
       >
-        Inscrivez vous ici</a
+        Inscrivez vous ici</router-link
       >
     </p>
   </div>
