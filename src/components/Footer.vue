@@ -1,42 +1,39 @@
 <template>
   <footer class="bg-blue-500 text-gray-800 py-6">
-    <div class="container mx-auto">
+    <div class="container lg:mx-auto">
       <div
-        class="flex flex-col md:flex-row justify-between font-serif text-2xl"
+        class="flex flex-col justify-center items-center md:flex-row md:justify-between font-serif text-2xl"
       >
         <!-- Section de contact -->
-        <div class="md:w-1/3 ml-24 flex">
-         <img src="../assets/logoCSEprofil.png" alt="Logo" class="h-28 w-32" />
-          <div class=""> 
-            <p>CYBER</p>
-            <p>SECURITY</p>
-            <p>ENGINEER</p>
-          </div>
-         
+        <div
+          class="md:w-1/3 lg:ml-12 flex justify-center md:justify-start items-center mb-4 md:mb-0"
+        >
+          <img src="../assets/LOG0.png" alt="Logo" class="h-28 w-44" />
+          
         </div>
         <!-- Réseaux sociaux -->
-        <div class="md:w-1/3 mt-4 md:mt-0 ml-4">
-          <h2 class="text-2xl font-sans mb-4 ml-6">Suivez-nous</h2>
-          <ul class="flex space-x-4 mt-6">
-            <li>
+        <div class="md:w-1/3 mt-4 md:mt-0 lg:ml-4 md:ml-16">
+          <h2 class="text-2xl font-sans mb-4 ml-16">Suivez-nous</h2>
+          <ul class="flex justify-center md:justify-start space-x-4">
+        <li>
               <a href="#" class="hover:text-gray-400"
                 ><img
-                  class="h-6 w-6"
-                  src="../assets/tiktok-logo-logo-svgrepo-com.svg"
+                  class="h-9 w-9"
+                  src="../assets/tik-tok_3046133.png"
                   alt=""
               /></a>
             </li>
-            <li>
-              <a href="#" class="hover:text-gray-400"
-                ><img class="h-6 w-9" src="../assets/YouTube_full-.png" alt=""
+            <li class="">
+              <a href="https://www.youtube.com/channel/UCIMQ5e4gALHCoCc9nao0icQ" target="_blank" class="hover:text-gray-400"
+                ><img class="h-9 w-9" src="../assets/YouTube_full-.png" alt=""
               /></a>
             </li>
-            <li>
+          <li>
               <a href="#" class="hover:text-gray-400"
                 ><svg
                   fill="currentColor"
                   viewBox="0 0 24 24"
-                  class="h-6 w-6"
+                  class="h-9 w-9"
                   aria-hidden="true"
                 >
                   <path
@@ -51,7 +48,7 @@
                 ><svg
                   fill="currentColor"
                   viewBox="0 0 24 24"
-                  class="h-6 w-6"
+                  class="h-9 w-9"
                   aria-hidden="true"
                 >
                   <path
@@ -69,7 +66,7 @@
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  class="w-6 h-6"
+                  class="w-9 h-9"
                   viewBox="0 0 24 24"
                 >
                   <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
@@ -81,18 +78,20 @@
           </ul>
         </div>
         <!-- Liens rapides -->
-        <div class="md:w-1/3 mt-4 md:mt-0 text-left mr-12">
+        <div class="md:w-1/3 mt-4 md:mt-0 text-center md:text-left mr-12">
           <ul>
-            <li><a href="#" class="hover:text-gray-400">A propos </a></li>
             <li>
-              <a href="#" class="hover:text-gray-400"
-                >support@csetrainings.com</a
+              <router-link to="/propos">
+              <p class="">A propos </p> </router-link></li>
+            <li>
+              <p  class=" ml-6 md:ml-0 lg:ml-0"
+                >support@evenements.com</p
               >
             </li>
-            <router-link
+            <button
               class="bg-white px-4 py-1 text-blue-400 poppins rounded-lg ring-red-300 focus:outline-none focus:ring-4 transform transition duration-700 hover:scale-105"
-              to="/auth/register"
-              >CONTACTEZ-NOUS!</router-link
+              @click="contactezNous"
+              >CONTACTEZ-NOUS!</button
             >
           </ul>
         </div>
@@ -104,6 +103,12 @@
 <script>
 export default {
   name: "Footer",
+  methods: {
+    contactezNous() {
+      // Ouvrir un client de messagerie avec l'adresse e-mail pré-remplie
+      window.location.href = "mailto:support@evenements.com";
+    }
+  }
 };
 </script>
   

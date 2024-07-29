@@ -2,8 +2,7 @@
 import axios from "axios";
 //import TheModal from "../components/TheModal.vue";
 
-import TokenService from "../services/storage.service";
-import ApiService from "../services/api.service";
+
 import Noty from "noty";
 import "noty/lib/noty.css";
 import "noty/lib/themes/mint.css";
@@ -21,7 +20,7 @@ export default {
     return {
       form: {
         email: "",
-        password: "",
+        //password: "",
         // local: null,
       },
       alert: {
@@ -37,37 +36,24 @@ export default {
   //   this.form.local = this.$i18n.locale;
   // },
   methods: {
-    async login() {
+    async motdepasse() {
       try {
-         this.isLoading = true;
-        const response = await axios.post("/api/auth/login", this.form);
-        if (response.data.access_token) {
-          TokenService.saveToken(response.data.access_token);
-          ApiService.setHeader();
+        this.isLoading = true;
+        const response = await axios.post("/api/auth/password/email", this.form);
+        if (response.status === 200) {
           this.isLoading = false;
-          new Noty({
+         new Noty({
             type: "success",
             layout: "topRight",
-            text: "Merci, pour votre connexion.",
+            text: "Merci, nous allons vous envoyer un e-mail à votre adresse e-mail.",
             timeout: 5000,
           }).show();
           this.form = {};
           this.$router.push("/");
-          
-
-        } else {
-          // Gestion d'une réponse sans jeton d'accès
-          this.isLoading = false;
-          this.showAlert = true;
-          this.alert.message =
-            "Erreur lors de la connexion. Veuillez réessayer plus tard.";
-          setTimeout(() => {
-            this.showAlert = false;
-          }, 5000);
         }
       } catch (error) {
-        // Gestion des erreurs HTTP
         this.isLoading = false;
+        // Gestion des erreurs HTTP
         if (error.response && error.response.status === 422) {
           this.showAlert = true;
           this.alert.message = "Adresse e-mail ou mot de passe incorrect.";
@@ -91,12 +77,12 @@ export default {
   <div v-show="showAlert">
         <AlertComponent :content="alert.message" type-alert="error" />
       </div>
-    <h1 class="font-bold text-xl text-white">Se connecter</h1>
+    <h1 class="font-bold text-xl text-white">Réinitialiser le mot de passe</h1>
     <form
       method="POST"
       action="#"
       class="space-y-4 md:space-y-6"
-      @submit.prevent="login()"
+      @submit.prevent="motdepasse()"
     >
       <div class="">
         <label class="block font-bold text-sm text-white text-left">Email</label>
@@ -110,42 +96,6 @@ export default {
           />
         </div>
       </div>
-      
-      <div class="space-y-1 mt-5">
-        <label class="block font-bold text-sm text-white text-left">Password</label>
-        <div class="mt-1">
-          <input
-          class="block w-full p-2 border border-input-disable rounded-md focus:outline-none focus:ring-primary-normal focus:ring focus:ring-opacity-50 shadow-sm focus:border"
-            type="password"
-            autocomplete="current-password"
-             v-model="form.password"
-            required
-          />
-        </div>
-      </div>
-      <div class="flex items-center justify-between">
-        <div class="hidden sm:flex sm:items-start">
-          <div class="flex items-center">
-            <input
-              id="remember-me"
-              name="remember-me"
-              type="checkbox"
-              class="rounded border-gray-300 mt-1 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-            />
-          </div>
-          <div class="ml-1 text-sm">
-            <label for="remember" class="text-sm font-medium text-white dark:text-gray-300 ">Se souvenir de moi
-            </label>
-          </div>
-        </div>
-
-         <router-link to="/auth/password"
-          class=" bg-blue-500 rounded-full px-4 text-sm font-medium text-black hover:underline dark:text-primary-500"
-        >
-          Mot de passe oublie
-         </router-link>
-      </div>
-
       <button
         type="submit"
         class="bg-blue-500 text-white px-8 py-2 focus:outline-none poppins rounded-full mt-24 transform transition duration-300 hover:scale-105"
@@ -154,7 +104,7 @@ export default {
           <spiner />
         </span>
         <spam v-else class="ml-2 flex">
-          <span> Connexion</span>
+          <span> Envoyer</span>
         </spam>
       </button>
     </form>

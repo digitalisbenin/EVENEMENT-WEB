@@ -1,11 +1,12 @@
-<template>
-  <img src="../assets/10050141pro.jpg" alt="" class="" loading="lazy" />
+<template class="bg-white h-full">
+<img src="../assets/1005.jpg" alt="" class="" loading="lazy" />
   <div class="bg-gray-900">
-    <div class="h-9"></div>
-      <div class="lg:flex lg:mx-12">
+    
+      <div class="h-9"></div>
+       <div class="lg:flex lg:mx-12">
        
        <h1 class="text-white text-3xl font-bold mt-4 lg:mt-0">
-        Événement Pro
+        Événement Digitaux
       </h1>
    
       <div class="lg:ml-auto ">
@@ -35,8 +36,7 @@
         </div>
       </div>
       </div>
-     
-     <div class="flex flex-wrap lg:mx-12 mt-4">
+ <div class="flex flex-wrap lg:mx-12 mt-4">
       <div
         v-for="event in demandes"
         :key="event.id"
@@ -92,35 +92,32 @@
    
   </div>
 </template>
-
+  
 <script>
 import axios from "axios";
+//import spiner from "../components/spiner.vue";
 export default {
-  name: "Blog",
-  data() {
-    return {
-      demandes: [],
-      currentPage: 1,
-      itemsPerPage: 5,
-    };
-  },
-  mounted() {
-    this.getdemande();
-  },
-  computed: {
-  
-    sortedBlogs() {
-      // Triez les vidéos par date de création dans l'ordre décroissant
-      return this.blogs
-        .slice()
-        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-    },
+  name: "App",
+  components: {
+    //spiner,
  
   },
+  data() {
+    return {
+    addform: {
+        user_id: "",
+      },
+      demandes: [],
+      isLoading: false,
+    };
+  },
+   mounted() { 
+    this.getdemande();
+  },
   methods: {
-    async getdemande() {
+   async getdemande() {
       try {
-        const response = await axios.get(`/api/demandestype?type_demande_id=${3}`);
+        const response = await axios.get(`/api/demandestype?type_demande_id=${1}`);
         if (response.data) {
           this.demandes = response.data.data;
           
@@ -129,10 +126,10 @@ export default {
         console.log(error.data);
       }
     },
-
   },
 };
 </script>
+  
 <style scoped>
 
 .fade-enter,
@@ -322,3 +319,4 @@ export default {
   padding-bottom: 1px;
 }
 </style>
+  
