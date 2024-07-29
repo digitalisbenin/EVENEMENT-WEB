@@ -11,7 +11,7 @@ import TokenService from "./services/storage.service";
 
 Pusher;
 
-ApiService.init("http://127.0.0.1:8000/");
+ApiService.init("https://evenement.wadounnou.com/");
 if (TokenService.getToken()) {
   ApiService.setHeader();
 }
