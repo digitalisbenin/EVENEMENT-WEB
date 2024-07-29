@@ -139,12 +139,11 @@ export default {
             class="block w-full p-2 border border-input-disable rounded-md focus:outline-none focus:ring-primary-normal focus:ring focus:ring-opacity-50 shadow-sm focus:border"
             v-model="form.password"
             type="password"
-            @input="validatePassword"
-            @paste="preventPaste"
+            
             required
           />
         </div>
-         <div class="text-red-500" v-if="passwordErrorMessage">{{ passwordErrorMessage }}</div>
+         
       </div>
       <div class="space-y-1 mt-5">
         <label class="block font-bold text-sm text-gray-700 text-left">Confirmation du mot de passe</label>

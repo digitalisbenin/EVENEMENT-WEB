@@ -135,6 +135,7 @@ export default {
       axios.post('/api/sendemail', this.formData)
         .then(response => {
           this.formData={},
+           this.$router.push("/");
           this.isLoading = false;
           console.log(response.data);
         })

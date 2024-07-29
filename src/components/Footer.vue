@@ -85,7 +85,7 @@
               <p class="">A propos </p> </router-link></li>
             <li>
               <p  class=" ml-6 md:ml-0 lg:ml-0"
-                >support@evenements.com</p
+                >evenement@wadounnou.com</p
               >
             </li>
             <button
@@ -106,7 +106,7 @@ export default {
   methods: {
     contactezNous() {
       // Ouvrir un client de messagerie avec l'adresse e-mail pré-remplie
-      window.location.href = "mailto:support@evenements.com";
+      window.location.href = "mailto:evenement@wadounnou.com";
     }
   }
 };
