@@ -1,8 +1,8 @@
 <template>
   <div class="bg-slate-800" id="contact">
-        <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-            <div class="mb-4 ">
-                <div class="mb-6 max-w-3xl text-center sm:text-center md:mx-auto md:mb-12 ">
+        
+            <div class=" bg-blue-500">
+                <div class="max-w-3xl text-center sm:text-center md:mx-auto md:mb-12 ">
                     <p class="text-base font-semibold h-9 uppercase tracking-wide text-blue-600">
                         
                     </p>
@@ -10,8 +10,7 @@
                         class="font-heading mb-4 font-bold tracking-tight text-gray-900 text-white text-3xl sm:text-5xl">
                         Contact
                     </h2>
-                    <p class="mx-auto mt-4 max-w-3xl text-xl text-gray-600 text-white">
-                    </p>
+                   <div class="lg:h-9"></div>
                 </div>
             </div>
             <div class="flex items-stretch justify-center">
@@ -99,7 +98,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+       
     </div>
 
   <!-- Composant de modal -->
