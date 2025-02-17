@@ -3,7 +3,7 @@
   <div class="custom-background h-screen  ">
     <!-- Logo du tableau de bord -->
     <router-link class=" " to="/">
-        <img src="../assets/LOG0.png" alt="Logo" class="h-32  w-auto mx-auto my-auto " />
+        <img src="../assets/LOG.png" alt="Logo" class="h-32  w-auto mx-auto my-auto " />
         
       </router-link>
   <!-- Contenu du tableau de bord -->

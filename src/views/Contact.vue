@@ -1,21 +1,21 @@
 <template>
   <div class="bg-slate-800" id="contact">
         
-            <div class=" bg-blue-500">
+            <div class=" bg-green-400">
                 <div class="max-w-3xl text-center sm:text-center md:mx-auto md:mb-12 ">
                     <p class="text-base font-semibold h-9 uppercase tracking-wide text-blue-600">
                         
                     </p>
-                    <h2
-                        class="font-heading mb-4 font-bold tracking-tight text-gray-900 text-white text-3xl sm:text-5xl">
-                        Contact
-                    </h2>
+                    <p
+                        class="font-heading mb-4 font-bold  text-gray-900 text-white text-xl sm:text-5xl">
+                        Besoin d'informations ou envie de nous contacter ? 
+                    </p>
                    <div class="lg:h-9"></div>
                 </div>
             </div>
             <div class="flex items-stretch justify-center">
                 <div class="grid md:grid-cols-2">
-                    <div class="h-full pr-6">
+                    <div class="h-full pr-6 mx-6 lg:mx-0">
                         <p class="mt-3 mb-12 text-lg text-gray-600 text-white">
                             
                         </p>
@@ -32,10 +32,10 @@
                                     </svg>
                                 </div>
                                 <div class="ml-4 mb-4">
-                                    <h3 class="mb-2 text-lg font-medium leading-6 text-gray-900 text-white"> Address
+                                    <h3 class="mb-2 text-lg font-medium leading-6 text-gray-900 text-white"> Adresses
                                     </h3>
                                     <p class="text-gray-600 text-white">IITA ,Immeuble à droite près de l'églises des Assemblées de Dieu</p>
-                                    <p class="text-gray-600 text-white">Calavi, Togoudo</p>
+                                    <p class="text-gray-600 text-white">Abomey-Calavi/Togoudo</p>
                                 </div>
                             </li>
                             <li class="flex">
@@ -51,10 +51,10 @@
                                     </svg>
                                 </div>
                                 <div class="ml-4 mb-4">
-                                    <h3 class="mb-2 text-lg font-medium leading-6 text-gray-900 text-white">Contact
+                                    <h3 class="mb-2 text-lg font-medium leading-6 text-gray-900 text-white">Contacts
                                     </h3>
-                                    <p class="text-gray-600 text-white">Mobile:(+229) 94863786</p>
-                                    <p class="text-gray-600 text-white">Mail: evenement@wadounnou.com</p>
+                                    <p class="text-gray-600 text-white">Mobile:(+229) 0197825820/0194863786</p>
+                                    <p class="text-gray-600 text-white">Mail: info@nouwiwa.com</p>
                                 </div>
                             </li>
                             <li class="flex">
@@ -69,7 +69,8 @@
                                 <div class="ml-4 mb-4">
                                     <h3 class="mb-2 text-lg font-medium leading-6 text-gray-900 text-white">
                                         Heure d'ouverture</h3>
-                                    <p class="text-gray-600 text-white">Lundi - Vendredi: 08:00 - 19:00</p>
+                                    <p class="text-gray-600 text-white">lundi - vendredi : 8h - 19h</p>
+                                     <p class="text-gray-600 text-white">Samedi : 9h -14h</p>
 
                                 </div>
                             </li>
@@ -92,7 +93,7 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="w-full bg-blue-800 text-white px-6 py-3 font-xl rounded-md sm:mb-0">Envoyer</button>
+                                <button type="submit" class="w-full bg-green-400 text-white px-6 py-3 font-xl rounded-md sm:mb-0">Envoyer</button>
                             </div>
                         </form>
                     </div>

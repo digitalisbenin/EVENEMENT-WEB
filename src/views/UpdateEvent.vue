@@ -1,7 +1,7 @@
 <template>
   <div class="overflow-x-auto shadow-md sm:rounded-lg bg-white p-4">
     <div>
-      <form action="#" method="POST" @submit.prevent="addRestaurant()">
+      <form action="#" method="POST" @submit.prevent="UpdatEvenementNew()">
         <div class="">
           <div class="flex mt-6 mb-9">
             <div class="flex-1 border-r-2 pr-4">
@@ -11,7 +11,7 @@
             <div class="flex-1 text-center">
               <!-- Contenu au milieu -->
               <h1 class="lg:text-xl text-xl font-bold bg-green-500 rounded-lg">
-                Formulaire d'envoi d'événement
+                Mise à jour de l'événement
               </h1>
             </div>
             <div class="flex-1 border-l-2 pl-4">
@@ -29,13 +29,13 @@
                       value="Nom de l'événement"
                       class="text-left font-bold"
                     />
-                    <BaseInput id="nom" v-model="addform.name" class="mt-1" />
+                    <BaseInput id="nom" v-model="demandes.name" class="mt-1" />
                   </div>
 
                   <!-- Champ "Lieux" -->
                   <div class="flex flex-col flex-1">
                     <BaseLabel value="Lieux (Ex:Cotonou)" class="text-left font-bold" />
-                    <BaseInput id="lieu" v-model="addform.lieu" class="mt-1" />
+                    <BaseInput id="lieu" v-model="demandes.lieu" class="mt-1" />
                   </div>
                 </div>
                 <div class="col-span-8 sm:col-span-8 mb-2">
@@ -46,7 +46,7 @@
                   <div class="mt-1">
                     <textarea
                       class="block w-full p-2 border border-input-disable rounded-md focus:outline-none focus:ring-primary-normal focus:ring focus:ring-opacity-50 shadow-sm focus:border"
-                      v-model="addform.description"
+                      v-model="demandes.description"
                       autocomplete="current-password"
                     />
                   </div>
@@ -70,26 +70,17 @@
                           <input
                             type="radio"
                             value="0"
-                            v-model="addform.payement"
+                            v-model="demandes.payement"
                             class="form-radio h-4 w-4 text-green-600"
                           />
-                          <span>Libre</span>
+                          <span>Gratuit</span>
                         </label>
                         <!-- Checkbox Payant -->
                         <label class="flex items-center space-x-2">
                           <input
                             type="radio"
                             value="1"
-                            v-model="addform.payement"
-                            class="form-radio h-4 w-4 text-red-600"
-                          />
-                          <span>Prix unique</span>
-                        </label>
-                        <label class="flex items-center space-x-2">
-                          <input
-                            type="radio"
-                            value=""
-                            v-model="addform.payement"
+                            v-model="demandes.payement"
                             class="form-radio h-4 w-4 text-red-600"
                           />
                           <span>Payant</span>
@@ -103,7 +94,7 @@
                       class="text-left font-bold"
                     />
                     <div class="relative mt-1">
-                      <BaseInput v-model="addform.nombre_jour" class="mt-1" />
+                      <BaseInput v-model="demandes.nombre_jour" class="mt-1" />
                     </div>
                   </div>
                 </div>
@@ -112,7 +103,7 @@
                   <!-- Champ "Téléphone" -->
                   <div
                     :class="
-                      addform.payement === '0'
+                      demandes.payement === '0'
                         ? 'flex flex-col flex-1'
                         : 'flex flex-col flex-1'
                     "
@@ -120,7 +111,7 @@
                     <BaseLabel value="Téléphone" class="text-left font-bold" />
                     <div class="relative mt-1">
                       <BaseInput
-                        v-model="addform.telephone"
+                        v-model="demandes.telephone"
                         placeholder="62333333"
                         class="mt-1"
                       />
@@ -129,14 +120,14 @@
 
                   <!-- Champ "Prix" (masqué si Gratuit) -->
                   <div
-                    v-if="addform.payement !== '0'"
+                    v-if="demandes.payement !== '0'"
                     class="flex flex-col flex-1"
                   >
                     <BaseLabel value="Prix" class="text-left font-bold" />
                     <div class="relative mt-1">
                       <BaseInput
                         type="number"
-                        v-model="addform.montant"
+                        v-model="demandes.montant"
                         placeholder="100"
                         class="mt-1"
                       />
@@ -155,7 +146,7 @@
                       <select
                         name="category"
                         id="category"
-                        v-model="addform.type_demande_id"
+                        v-model="demandes.type_demande_id"
                         class="block w-full p-2 border border-input-disable rounded-md focus:outline-none focus:ring-primary-normal focus:ring focus:ring-opacity-50 shadow-sm focus:border"
                       >
                         <option
@@ -179,8 +170,8 @@
                       <select
                         name="category"
                         id="media-type"
-                        v-model="addform.is_correct"
-                        @change="handleMediaTypeChange"
+                        v-model="demandes.is_correct"
+                             @change="handleMediaTypeChange"
                         class="block w-full p-2 border border-input-disable rounded-md focus:outline-none focus:ring-primary-normal focus:ring focus:ring-opacity-50 shadow-sm focus:border"
                       >
                         <option value="0">Image</option>
@@ -189,8 +180,9 @@
                     </div>
                   </div>
                 </div>
-
-         <div class="lg:flex flex-wrap items-center gap-4 mb-2">
+              </div>
+            </div>
+            <div class="lg:flex flex-wrap items-center gap-4 mb-2">
   <!-- Champ Image -->
   <div class="flex flex-col flex-1">
     <BaseLabel value="Image" class="text-left font-bold" />
@@ -198,7 +190,7 @@
       id="image"
       type="file"
       @change="onFileChange"
-      :required="addform.is_correct === '0'"
+      :required="demandes.is_correct === '0'"
       class="mt-1"
     />
   </div>
@@ -210,14 +202,12 @@
       id="video"
       type="file"
       @change="onFileChanges"
-      :required="addform.is_correct === '1'"
+      :required="demandes.is_correct === '1'"
       class="mt-1"
     />
   </div>
 </div>
 
-              </div>
-            </div>
             <div class="lg:flex lg:mr-9">
               <div class="lg:w-1/2">
                 <BaseLabel
@@ -227,7 +217,7 @@
                 <BaseInput
                   type="datetime-local"
                   id="time"
-                  v-model="addform.date_debuit"
+                  v-model="demandes.date_debuit"
                   class="mt-2"
                 />
               </div>
@@ -236,7 +226,7 @@
                 <BaseInput
                   type="datetime-local"
                   id="time"
-                  v-model="addform.date_fin"
+                  v-model="demandes.date_fin"
                   class="mt-2"
                 />
               </div>
@@ -251,24 +241,17 @@
                 <span v-if="isLoading">
                   <spiner />
                 </span>
-                <span v-else>Enregistrer</span>
+                <span v-else>Mise à jour</span>
               </Button>
 
               <!-- Bouton "Annuler" -->
-              <Button
+              <!-- <Button
                 type="button"
                 class="bg-gray-500 text-white px-8 py-2 focus:outline-none rounded-lg transform transition duration-300"
                 @click="resetForm"
               >
                 Annuler
-              </Button>
-              <router-link
-                to="/mesevents"
-                type="button"
-                class="bg-red-500 text-white px-8 py-2 focus:outline-none rounded-lg transform transition duration-300"
-              >
-                Retour
-              </router-link>
+              </Button> -->
             </div>
           </div>
         </div>
@@ -341,11 +324,15 @@ export default {
       filter: "",
       userStatus: "",
       dataUpdat: [],
+      demandes: [],
     };
   },
   created() {
     this.profile();
     this.getSpecialite();
+  },
+  mounted() {
+    this.getdemande();
   },
   computed: {
     filteredRestaurant() {
@@ -361,13 +348,13 @@ export default {
   methods: {
     handleMediaTypeChange() {
       // Ici, la valeur de addform.is_correct a déjà été mise à jour grâce à v-model
-      console.log("Type de média sélectionné:", this.addform.is_correct);
+      console.log("Type de média sélectionné:", this.demandes.is_correct);
 
       // Vous pouvez effectuer des actions supplémentaires en fonction de la valeur choisie
-      if (this.addform.is_correct === "0") {
+      if (this.demandes.is_correct === "0") {
         // Si l'utilisateur choisit "Image", vous pouvez effectuer une action ici
         console.log("Image sélectionnée");
-      } else if (this.addform.is_correct === "1") {
+      } else if (this.demandes.is_correct === "1") {
         // Si l'utilisateur choisit "Vidéo", vous pouvez effectuer une autre action ici
         console.log("Vidéo sélectionnée");
       }
@@ -381,7 +368,19 @@ export default {
       this.RestaurantID = id;
       console.log(this.RestaurantID);
     },
-
+    async getdemande() {
+      try {
+        const response = await axios.get(
+          `/api/demandes/${this.$route.params.id}`
+        );
+        if (response.data) {
+          this.demandes = response.data.data;
+          this.phoneNumber = this.demandes.telephone;
+        }
+      } catch (error) {
+        console.log(error.data);
+      }
+    },
     async profile() {
       try {
         const response = await axios.get("/api/profile");
@@ -405,39 +404,24 @@ export default {
         console.log(error.data);
       }
     },
-    addRestaurant() {
-      if (this.userStatus === "valider") {
-        this.isLoading = true;
+UpdatEvenementNew() {
+  
+    this.isLoading = true;
 
-        if (this.image && this.images) {
-          this.Sendimage();
-        } else if (this.image) {
-          // Si seule l'image est sélectionnée
-          this.uploadImage();
-        } else if (this.images) {
-          // Si seule la vidéo est sélectionnée
-          this.uploadVideo();
-        } else {
-          // Aucun fichier sélectionné
-          this.showAlert = true;
-          this.alert.message = "Veuillez sélectionner une image ou une vidéo.";
-          this.isLoading = false;
-          setTimeout(() => {
-            this.showAlert = false;
-          }, 5000);
-        }
-      } else {
-        // Compte utilisateur non validé
-        this.alert.message = "Votre compte n'est pas encore validé.";
+    if (this.image && this.images) {
+   this.Sendimage()
 
-        this.showAlert = true;
-        this.isLoading = false;
-        setTimeout(() => {
-          this.showAlert = false;
-        }, 5000);
-      }
-    },
-
+    } else if (this.image) {
+      // Si seule l'image est sélectionnée
+      this.uploadImage();
+    } else if (this.images) {
+      // Si seule la vidéo est sélectionnée
+      this.uploadVideo();
+    } else {
+      // Aucun fichier sélectionné
+      this.UpdateEvenement();
+    }
+  },
     Sendimage() {
       if (this.userStatus === "valider") {
         this.isLoading = true;
@@ -453,7 +437,7 @@ export default {
           })
           .then((response) => {
             if (response.status == 201) {
-              this.addform.image = response.data.data.media_url;
+              this.demandes.image = response.data.data.media_url;
               this.SendVideo();
             }
           })
@@ -464,7 +448,6 @@ export default {
         // Affiche une alerte si le statut utilisateur n'est pas "valider"
         this.alert.message = "Votre compte n'ai pas encore valider.";
         this.showAlert = true;
-        this.isLoading = false;
         setTimeout(() => {
           this.showAlert = false;
         }, 5000);
@@ -484,113 +467,103 @@ export default {
         })
         .then((response) => {
           if (response.status == 201) {
-            this.addform.video = response.data.data.media_url;
-            this.sendRestaurant();
+            this.demandes.video = response.data.data.media_url;
+            this.UpdateEvenement();
           }
         })
         .catch((error) => {
           console.error(error);
         });
     },
-    async uploadImage() {
-      try {
-        const formData = new FormData();
-        formData.append("file", this.image);
+   async uploadImage() {
+  try {
+    const formData = new FormData();
+    formData.append("file", this.image);
 
-        const response = await axios.post("api/medias", formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
+    const response = await axios.post("api/medias", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
 
-        if (response.status === 201) {
-          this.addform.image = response.data.data.media_url;
+    if (response.status === 201) {
+      this.demandes.image = response.data.data.media_url;
 
-          // Si seule l'image est sélectionnée
-          if (!this.images) {
-            this.sendRestaurant();
-          }
-        }
-      } catch (error) {
-        console.error("Erreur lors de l'upload de l'image:", error);
+      // Si seule l'image est sélectionnée
+      if (!this.images) {
+        this.UpdateEvenement();
       }
-    },
+    }
+  } catch (error) {
+    console.error("Erreur lors de l'upload de l'image:", error);
+  }
+},
 
-    async uploadVideo() {
-      try {
-        const formData = new FormData();
-        formData.append("file", this.images);
+async uploadVideo() {
+  try {
+    const formData = new FormData();
+    formData.append("file", this.images);
 
-        const response = await axios.post("api/medias", formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
+    const response = await axios.post("api/medias", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
 
-        if (response.status === 201) {
-          this.addform.video = response.data.data.media_url;
+    if (response.status === 201) {
+      this.demandes.video = response.data.data.media_url;
 
-          // Si seule la vidéo est sélectionnée
-          if (!this.image) {
-            this.sendRestaurant();
-          }
-        }
-      } catch (error) {
-        console.error("Erreur lors de l'upload de la vidéo:", error);
+      // Si seule la vidéo est sélectionnée
+      if (!this.image) {
+        this.UpdateEvenement();
       }
-    },
-
-    resetForm() {
-      this.addform = {
-        name: "",
-        lieu: "",
-        description: "",
-        telephone: "",
-        montant: null,
-        type_demande_id: null,
-        is_correct: null,
-        date_debuit: "",
-        date_fin: "",
-      };
-    },
-
-    async sendRestaurant() {
+    }
+  } catch (error) {
+    console.error("Erreur lors de l'upload de la vidéo:", error);
+  }
+},
+    async UpdateEvenement() {
       try {
         this.isLoading = true;
-        this.addform.user_id = this.user;
-
-        const response = await axios.post("/api/demandes", this.addform);
-
-        if (response.status === 201) {
+        //this.addform.user_id = this.user;
+        const response = await axios.put(
+          `/api/demandes/${this.$route.params.id}`,
+          this.demandes
+        );
+        if (response.status == 200) {
           this.isLoading = false;
-          this.addform = {};
-
+          this.$router.push("/mesevents");
           new Noty({
             type: "success",
             layout: "topRight",
-            text: "Votre événement est créé avec succès",
+            text: "Votre evenement à été mise à jour avec succés",
             timeout: 5000,
           }).show();
         } else {
-          this.showErrorAlert();
+          this.showAlert = true;
+          this.isLoading = false;
+          this.alert.message =
+            "Quelque chose c'est mal passé. Merci d'essayer plus tard!";
+          setTimeout(() => {
+            this.showAlert = false;
+          }, 5000);
         }
       } catch (error) {
-        this.showErrorAlert();
+        if (error.response.status !== 500) {
+          this.isLoading = false;
+          this.showAlert = true;
+          this.alert.message =
+            "Quelque chose c'est mal passé. Merci d'essayer plus tard!";
+          setTimeout(() => {
+            this.showAlert = false;
+          }, 5000);
+        }
       }
     },
 
-    showErrorAlert() {
-      this.isLoading = false;
-      this.showAlert = true;
-      this.alert.message =
-        "Quelque chose s'est mal passé. Merci d'essayer plus tard!";
-      setTimeout(() => {
-        this.showAlert = false;
-      }, 5000);
-    },
-
     onFileChange(e) {
-      this.image = e.target.files[0];
+      const file = e.target.files[0];
+      this.image = file;
     },
-
     onFileChanges(e) {
-      this.images = e.target.files[0];
+      const file = e.target.files[0];
+      this.images = file;
     },
   },
 };

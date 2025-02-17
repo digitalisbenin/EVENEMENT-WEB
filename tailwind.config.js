@@ -4,14 +4,19 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      colors: {
+        orangeVif: '#ff9900',
+      },
     },
     fontFamily: {
       body: ' Montserrat, Varino',
       heading:
         'Montserrat,Varino',
-      sans: 'Montserrat, Varino',
+      //sans: 'Montserrat, Varino',
+      sans: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
       serif: 'Montserrat, Varino ',
-      mono: 'Varino',
+      //mono: 'Montserrat',
+      mono: 'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
 
     },
   },

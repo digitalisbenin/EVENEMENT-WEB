@@ -8,7 +8,7 @@
       <img src="../assets/classic-utility-jacket.82031370.jpg" alt="Logo" class="w-full " />
     </router-link>
     <div class="absolute top-0 w-full flex items-center justify-center">
-    <span class="text-4xl text-white mt-4 text-left font-semibold">WELCOME</span>
+    <!-- <span class="text-4xl text-white mt-4 text-left font-semibold">WELCOME</span> -->
   </div>
   </div>
 

@@ -1,60 +1,62 @@
 <template>
-  <img src="../assets/2.jpg" alt="" class="" loading="lazy" />
+  <img src="../assets/6.jpg" alt="" class="" loading="lazy" />
   <div class="bg-white">
     <div class="h-9"></div>
     <div class="lg:flex lg:mx-12 mx-6">
       <h1
+       
         class="text-gray-900 lg:text-3xl text-lg font-bold mt-4 lg:mt-0 lg:ml-4"
       >
-        Evènements de catégorie concert
+        Evènements de catégorie foire
       </h1>
 
       <div class="lg:ml-auto">
-        <div
-          class="rounded-lg lg:ml-0 text-gray-900 p-1 border border-gray-300 bg-white overflow-hidden ring-red-300 focus:ring-4 mt-4 lg:mt-0 lg:w-96 flex items-center"
-        >
-          <input
-            type="text"
-            v-model="filter"
-            class="rounded-lg px-4 focus:outline-none w-full bg-white text-gray-900"
-            placeholder="Rechercher"
-          />
-          <!-- Bouton pour effacer la recherche -->
-          <button
-            v-if="filter"
-            type="button"
-            @click="clearSearch"
-            class="flex items-center justify-center w-8 h-8 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-400 mr-2"
-            aria-label="Clear"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              class="w-4 h-4 text-red-500"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-          <!-- Bouton pour lancer la recherche -->
-          <button
-            type="button"
-            @click="searchAction"
-            class="flex items-center justify-center w-24 h-8 px-4 rounded-lg bg-orangeVif hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
-            aria-label="Search"
-          >
-            Rechercher
-          </button>
-        </div>
-      </div>
+  <div
+    class="rounded-lg  lg:ml-0 text-gray-900 p-1 border border-gray-300 bg-white overflow-hidden ring-red-300 focus:ring-4 mt-4 lg:mt-0 lg:w-96 flex items-center"
+  >
+    <input
+      type="text"
+      v-model="filter"
+      class="rounded-lg px-4 focus:outline-none w-full bg-white text-gray-900"
+      placeholder="Rechercher"
+    />
+    <!-- Bouton pour effacer la recherche -->
+    <button
+      v-if="filter"
+      type="button"
+      @click="clearSearch"
+      class="flex items-center justify-center w-8 h-8 rounded-full  focus:outline-none focus:ring-2 focus:ring-gray-400 mr-2"
+      aria-label="Clear"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        class="w-4 h-4 text-red-500"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
+    <!-- Bouton pour lancer la recherche -->
+    <button
+      type="button"
+      @click="searchAction"
+      class="flex items-center justify-center w-24 h-8 px-4 rounded-lg bg-orangeVif hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
+      aria-label="Search"
+    >
+      Rechercher
+    </button>
+  </div>
+</div>
     </div>
 
+   
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-4 mt-6 lg:mx-14 mx-6">
   <div
           v-if="filteredDemandes.length === 0"
@@ -67,17 +69,17 @@
     v-for="event in filteredDemandes"
     :key="event.id"
     class="bg-gray-200 p-4 rounded-lg shadow-md"
-    
+  
   >
     <template v-if="event.is_correct === 1">
-      <video @click="showEventDetails(event)"
+      <video   @click="showEventDetails(event)"
         class="transform transition duration-300 hover:scale-105 h-56 w-full rounded-lg"
         :src="event.video"
         controls
       ></video>
     </template>
     <template v-else>
-      <img @click="showEventDetails(event)"
+      <img   @click="showEventDetails(event)"
         class="transform transition duration-300 hover:scale-105 h-56 w-full rounded-lg"
         :src="event.image"
         alt="Image de l'événement"
@@ -215,14 +217,15 @@
   </div>
 </div>
 </div>
-    <router-link
-      to="/eventcategoriencours/2"
-      class="mx-auto mt-8 bg-orangeVif flex w-32 mb-4 justify-center items-center px-6 py-2 text-white font-bold rounded-lg shadow-md hover:bg-orange-600 transition duration-300 w-fit"
-    >
-      Voir plus
-    </router-link>
+<router-link
+  to="/eventcategoriencours/3"
+  class="mx-auto mt-8 bg-orangeVif flex w-32 mb-4 justify-center items-center px-6 py-2 text-white font-bold rounded-lg shadow-md hover:bg-orange-600 transition duration-300 w-fit"
+>
+  Voir plus
+  
+</router-link>
   </div>
-  <div class="bg-white">
+    <div class="bg-white">
     <!-- Row -->
     <div class="h-9"></div>
     <div class="lg:flex lg:mx-14 mx-6">
@@ -274,7 +277,7 @@
         </div>
       </div> -->
     </div>
-   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-4 mt-6 lg:mx-14 mx-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-4 mt-6 lg:mx-14 mx-6">
       <div
           v-if="demandetermine.length === 0"
           class=" text-gray-500 h-full text-center"
@@ -433,12 +436,13 @@
   </div>
 </div>
     </div>
-    <router-link
-      to="/eventcategorieterminer/2"
-      class="mx-auto mt-8 bg-orangeVif flex w-32 mb-4 justify-center items-center px-6 py-2 text-white font-bold rounded-lg shadow-md hover:bg-orange-600 transition duration-300 w-fit"
-    >
-      Voir plus
-    </router-link>
+<router-link
+  to="/eventcategorieterminer/3"
+  class="mx-auto mt-8 bg-orangeVif flex w-32 mb-4 justify-center items-center px-6 py-2 text-white font-bold rounded-lg shadow-md hover:bg-orange-600 transition duration-300 w-fit"
+>
+  Voir plus
+  
+</router-link>
     <!-- <div class="relative w-full h-64 overflow-hidden">
       <div class="carousel">
         <div
@@ -468,10 +472,10 @@ export default {
       demandes: [],
       currentPage: 1,
       itemsPerPage: 5,
-      filter: "",
-      filteredDemandes: [],
-      demandetermine: [],
-      selectedEvent: null,
+        filter: "",
+       filteredDemandes: [],
+         demandetermine: [],
+         selectedEvent: null,
       addforms: {
         vue: 1,
         
@@ -483,11 +487,11 @@ export default {
       },
     };
   },
-  mounted() {
+  mounted() {},
+  created() {
     this.getdemande();
-    this.getdemandeTypeTerminer();
+      this.getdemandeTypeTerminer()
   },
-  created() {},
   watch: {
     "$route.params.id": {
       immediate: true,
@@ -500,19 +504,6 @@ export default {
     },
   },
   computed: {
-    //   filtereddemande() {
-    //   const searchTerm = this.filter.toLowerCase();
-    //   const filtered_data = this.demandes.filter((restaurants) => {
-    //     if (!restaurants.name) {
-    //       console.log('Name is missing for:', restaurants); // Affiche l'objet sans `name`
-    //     }
-    //     const name = restaurants.name && typeof restaurants.name === 'string' ? restaurants.name.toLowerCase() : '';
-    //     return name.includes(searchTerm);
-    //   });
-    //   return filtered_data;
-    // }
-    // ,
-
     sortedBlogs() {
       // Triez les vidéos par date de création dans l'ordre décroissant
       return this.filteredDemandes
@@ -553,8 +544,8 @@ export default {
         const response = await axios.post("/api/likes", this.addform);
         if (response.status === 201 || response.status === 200) {
           this.addform = {};
-           this.getdemande();
-    this.getdemandeTypeTerminer();
+          this.getdemande();
+      this.getdemandeTypeTerminer()
         }
       } catch (error) {
         if (error.response.status !== 500) {
@@ -580,7 +571,7 @@ export default {
         console.log(error.data);
       }
     },
-    async getdemandeTypeTerminer() {
+     async getdemandeTypeTerminer() {
       try {
         const response = await axios.get(
           `/api/demandetypeterminer?type_demande_id=${this.$route.params.id}`
@@ -594,51 +585,50 @@ export default {
       }
     },
     formatDateTime(dateString) {
-      const options = {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-      };
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  };
 
-      const date = new Date(dateString);
+  const date = new Date(dateString);
 
-      return new Intl.DateTimeFormat("fr-FR", options).format(date);
-    },
-    searchAction() {
-      // Effectuer la recherche lorsque le bouton est cliqué
-      const searchTerm = this.filter.toLowerCase();
-      this.filteredDemandes = this.demandes.filter((restaurant) => {
-        const lieu =
-          restaurant.lieu && typeof restaurant.lieu === "string"
-            ? restaurant.lieu.toLowerCase()
-            : "";
-        return lieu.includes(searchTerm);
-      });
-    },
-    clearSearch() {
+
+
+ return new Intl.DateTimeFormat("fr-FR", options).format(date);
+},
+     searchAction() {
+    // Effectuer la recherche lorsque le bouton est cliqué
+    const searchTerm = this.filter.toLowerCase();
+    this.filteredDemandes = this.demandes.filter((restaurant) => {
+      const lieu = restaurant.lieu && typeof restaurant.lieu === 'string' ? restaurant.lieu.toLowerCase() : '';
+      return lieu.includes(searchTerm);
+    });
+  },
+  clearSearch() {
       // Réinitialiser le champ de recherche
-      this.filter = "";
+      this.filter = '';
       this.filteredDemandes = this.demandes; // Réinitialiser les résultats
     },
 
     isEventInProgress(date_debuit) {
-      const today = new Date().toISOString().split("T")[0]; // Date du jour (AAAA-MM-JJ)
-      const eventDate = new Date(date_debuit).toISOString().split("T")[0];
+      const today = new Date().toISOString().split('T')[0]; // Date du jour (AAAA-MM-JJ)
+      const eventDate = new Date(date_debuit).toISOString().split('T')[0];
       return today === eventDate; // Compare uniquement les dates
     },
     isEventUpcoming(date_debuit) {
-      const today = new Date().toISOString().split("T")[0]; // Date du jour (AAAA-MM-JJ)
-      const eventDate = new Date(date_debuit).toISOString().split("T")[0];
+      const today = new Date().toISOString().split('T')[0]; // Date du jour (AAAA-MM-JJ)
+      const eventDate = new Date(date_debuit).toISOString().split('T')[0];
       return eventDate > today; // Compare uniquement les dates
     },
     getEventStatus(date_debuit) {
-      const today = new Date().toISOString().split("T")[0];
-      const eventDate = new Date(date_debuit).toISOString().split("T")[0];
-      if (today === eventDate) return "En cours";
-      if (eventDate > today) return "À venir";
-      return "Terminé"; // Si nécessaire
+      const today = new Date().toISOString().split('T')[0];
+      const eventDate = new Date(date_debuit).toISOString().split('T')[0];
+      if (today === eventDate) return 'En cours';
+      if (eventDate > today) return 'À venir';
+      return 'Terminé'; // Si nécessaire
     },
   },
 };

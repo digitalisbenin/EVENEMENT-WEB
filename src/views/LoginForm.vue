@@ -4,9 +4,9 @@ import axios from "axios";
 
 import TokenService from "../services/storage.service";
 import ApiService from "../services/api.service";
-import Noty from "noty";
-import "noty/lib/noty.css";
-import "noty/lib/themes/mint.css";
+//import Noty from "noty";
+//import "noty/lib/noty.css";
+//import "noty/lib/themes/mint.css";
 import spiner from "../components/spiner.vue";
 import AlertComponent from "../components/AlertComponent.vue";
 export default {
@@ -45,12 +45,12 @@ export default {
           TokenService.saveToken(response.data.access_token);
           ApiService.setHeader();
           this.isLoading = false;
-          new Noty({
-            type: "success",
-            layout: "topRight",
-            text: "Merci, pour votre connexion.",
-            timeout: 5000,
-          }).show();
+          // new Noty({
+          //   type: "success",
+          //   layout: "topRight",
+          //   text: "Merci, pour votre connexion.",
+          //   timeout: 5000,
+          // }).show();
           this.form = {};
           this.$router.push("/");
           

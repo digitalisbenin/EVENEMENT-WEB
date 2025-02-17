@@ -6,8 +6,14 @@ import loadingService from '@/services/loadingService';
 // Importez les composants associés à chaque route
 import Home from './views/Home.vue';
 import Blog from './views/Blog.vue';
-
+import EvenTernimer from './views/EvenTernimer.vue';
+import EvenementEncours from './views/EvenementEncours.vue';
+import EvenementCategorieEncours from './views/EvenementCategorieEncours.vue';
+import EventCategorieTerminer from './views/EventCategorieTerminer.vue';
+import UpdateEvent from './views/UpdateEvent.vue';
 import Propos from './views/Propos.vue';
+import Show from './views/Show.vue';
+import Foire from './views/Foire.vue';
 import DetailEvents from './views/DetailEvents.vue';
 import LoginForm from './views/LoginForm.vue';
 import SendMail from './views/SendMail.vue';
@@ -28,16 +34,22 @@ import RegisterLayout from './layouts/RegisterLayout.vue';
 
 const routes = [
   { path: '/', component: Home },
-  { path: '/evenementPro', component: Blog },
-
+  { path: '/concert/:id', component: Blog },
+  { path: '/shows/:id', component: Show },
+  { path: '/eventcategorieterminer/:id', component: EventCategorieTerminer },
+  { path: '/eventcategoriencours/:id', component: EvenementCategorieEncours },
+  { path: '/foires/:id', component: Foire },
   { path: '/contact', component: Contact },
   { path: '/mesevents', component: MesEvenement },
   { path: '/addevents', component: AddEvents },
+  { path: '/updatevents/:id', component: UpdateEvent },
   { path: '/detailevents/:id', component: DetailEvents },
-  { path: '/evenementEtudiant', component: BlogDetail },
+  { path: '/autres', component: BlogDetail },
+  { path: '/eventsterminer', component: EvenTernimer },
+  { path: '/eventsencours', component: EvenementEncours },
 
 
-  { path: '/evenementDigitals', component: conditionForum },
+  { path: '/promotions/:id', component: conditionForum },
   { path: '/propos', component: Propos },
 
 
@@ -68,6 +80,13 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(),
     routes,
+    scrollBehavior(to, from, savedPosition) {
+      if (savedPosition) {
+        return savedPosition; // Restaure la position sauvegardée (utile pour "Précédent"/"Suivant").
+      } else {
+        return { top: 0 }; // Défile jusqu'en haut pour chaque nouvelle navigation.
+      }
+    },
   });
   
   router.beforeEach((to, from, next) => {
