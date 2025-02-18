@@ -547,7 +547,7 @@
               </svg>
               <p class="ml-1 mt-1">{{ event.nbr_reading }}</p>
             </div>
-            <div @click="like(event.id)" class="flex text-green-500">
+            <button @click="like(event.id)" class="flex text-green-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -563,7 +563,7 @@
                 />
               </svg>
               <p class="ml-1 mt-1">{{ event.nbr_likes }}</p>
-            </div>
+</button>
 
             <p
               class="text-lg font-bold text-left mt-1 ml-4"
@@ -812,7 +812,7 @@
               </svg>
               <p class="ml-1 mt-1">{{ event.nbr_reading }}</p>
             </div>
-            <div @click="like(event.id)" class="flex text-green-500">
+            <button @click="like(event.id)" class="flex text-green-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -828,7 +828,7 @@
                 />
               </svg>
               <p class="ml-1 mt-1">{{ event.nbr_likes }}</p>
-            </div>
+</button>
             <p class="text-sm font-bold text-left text-red-500 mt-1 ml-4">
               Terminer
             </p>
