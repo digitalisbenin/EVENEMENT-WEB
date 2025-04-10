@@ -231,6 +231,30 @@
                 />
               </div>
             </div>
+              <div class="flex flex-col flex-1 mt-2">
+              <BaseLabel
+                value="Jour de la semaine (uniquement pour les événements à répétition)"
+                class="text-left font-bold"
+              />
+              <div class="relative mt-1">
+                <select
+                  name="day"
+                  id="day-select"
+                  v-model="demandes.jours"
+                  
+                  class="block w-full p-2 border border-input-disable rounded-md focus:outline-none focus:ring-primary-normal focus:ring focus:ring-opacity-50 shadow-sm focus:border"
+                >
+                  <option disabled selected>Choisissez un jour</option>
+                  <option value="Lundi">Lundi</option>
+                  <option value="Mardi">Mardi</option>
+                  <option value="Mercredi">Mercredi</option>
+                  <option value="Jeudi">Jeudi</option>
+                  <option value="Vendredi">Vendredi</option>
+                  <option value="Samedi">Samedi</option>
+                  <option value="Dimanche">Dimanche</option>
+                </select>
+              </div>
+            </div>
             <div class="flex gap-4 mt-4">
               <!-- Bouton "Envoyer" -->
 

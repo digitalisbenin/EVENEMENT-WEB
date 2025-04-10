@@ -34,7 +34,10 @@
 
                   <!-- Champ "Lieux" -->
                   <div class="flex flex-col flex-1">
-                    <BaseLabel value="Lieux (Ex:Cotonou)" class="text-left font-bold" />
+                    <BaseLabel
+                      value="Lieux (Ex:Cotonou)"
+                      class="text-left font-bold"
+                    />
                     <BaseInput id="lieu" v-model="addform.lieu" class="mt-1" />
                   </div>
                 </div>
@@ -190,32 +193,31 @@
                   </div>
                 </div>
 
-         <div class="lg:flex flex-wrap items-center gap-4 mb-2">
-  <!-- Champ Image -->
-  <div class="flex flex-col flex-1">
-    <BaseLabel value="Image" class="text-left font-bold" />
-    <BaseInput
-      id="image"
-      type="file"
-      @change="onFileChange"
-      :required="addform.is_correct === '0'"
-      class="mt-1"
-    />
-  </div>
+                <div class="lg:flex flex-wrap items-center gap-4 mb-2">
+                  <!-- Champ Image -->
+                  <div class="flex flex-col flex-1">
+                    <BaseLabel value="Image" class="text-left font-bold" />
+                    <BaseInput
+                      id="image"
+                      type="file"
+                      @change="onFileChange"
+                      :required="addform.is_correct === '0'"
+                      class="mt-1"
+                    />
+                  </div>
 
-  <!-- Champ Vidéo -->
-  <div class="flex flex-col flex-1">
-    <BaseLabel value="Vidéo" class="text-left font-bold" />
-    <BaseInput
-      id="video"
-      type="file"
-      @change="onFileChanges"
-      :required="addform.is_correct === '1'"
-      class="mt-1"
-    />
-  </div>
-</div>
-
+                  <!-- Champ Vidéo -->
+                  <div class="flex flex-col flex-1">
+                    <BaseLabel value="Vidéo" class="text-left font-bold" />
+                    <BaseInput
+                      id="video"
+                      type="file"
+                      @change="onFileChanges"
+                      :required="addform.is_correct === '1'"
+                      class="mt-1"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
             <div class="lg:flex lg:mr-9">
@@ -241,6 +243,31 @@
                 />
               </div>
             </div>
+            <div class="flex flex-col flex-1 mt-2">
+              <BaseLabel
+                value="Jour de la semaine (uniquement pour les événements à répétition)"
+                class="text-left font-bold"
+              />
+              <div class="relative mt-1">
+                <select
+                  name="day"
+                  id="day-select"
+                  v-model="addform.jours"
+                  
+                  class="block w-full p-2 border border-input-disable rounded-md focus:outline-none focus:ring-primary-normal focus:ring focus:ring-opacity-50 shadow-sm focus:border"
+                >
+                  <option disabled selected>Choisissez un jour</option>
+                  <option value="Lundi">Lundi</option>
+                  <option value="Mardi">Mardi</option>
+                  <option value="Mercredi">Mercredi</option>
+                  <option value="Jeudi">Jeudi</option>
+                  <option value="Vendredi">Vendredi</option>
+                  <option value="Samedi">Samedi</option>
+                  <option value="Dimanche">Dimanche</option>
+                </select>
+              </div>
+            </div>
+
             <div class="flex gap-4 mt-4">
               <!-- Bouton "Envoyer" -->
 
@@ -314,6 +341,7 @@ export default {
         date_debuit: "",
         date_fin: "",
         nombre_jour: "",
+        jours: "",
         payement: "",
         montant: 0,
         status: "En attente",

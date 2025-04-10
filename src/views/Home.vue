@@ -24,22 +24,12 @@
           v-for="(event, index) in usersdemande"
           :key="event.id"
           :class="[
-            'absolute inset-0 transition-opacity duration-1000',
+            'absolute inset-0 transition-opacity ',
             currentEventIndex === index ? 'opacity-100' : 'opacity-0',
           ]"
           :style="{ backgroundImage: `url(${event.image})` }"
           class="bg-cover bg-center flex items-center justify-center text-white h-full"
-        >
-          <!-- <div
-        class="bg-black bg-opacity-50 p-4 rounded-lg text-center max-w-md"
-      >
-        <p class="text-lg font-bold">{{ event.name }} à {{ event.lieu }}</p>
-        <p class="text-sm">
-            {{ formatDateTime(event.date_debuit) }} - {{ event.montant }} FCFA
-        </p>
-        <p class="text-sm font-bold text-green-400 mt-1">En cours</p>
-      </div> -->
-        </div>
+        ></div>
       </div>
 
       <!-- Deuxième div -->
@@ -59,7 +49,7 @@
                 :key="index"
                 class="flex-shrink-0 w-full h-full"
               >
-                <img 
+                <img
                   :src="event.image"
                   class="w-full h-full object-contain"
                   alt="carousel image"
@@ -170,7 +160,7 @@
               :style="{ transform: `translateX(-${currentIndex * 100}%)` }"
             >
               <div
-                v-for="(event, index) in publications"
+                v-for="(event, index) in filteredPublications"
                 :key="index"
                 class="flex-shrink-0 w-full h-full"
               >
@@ -241,11 +231,13 @@
             :key="index"
             class="flex-shrink-0 w-1/8 flex justify-center items-center p-4 bg-gray-200 m-2 rounded-lg"
           >
-            <img
-              :src="images.image"
-              :alt="images.name"
-              class="h-24 w-24 hover:text-gray-900 dark:hover:text-white object-contain"
-            />
+            <a :href="images.name" target="_blank">
+              <img
+                :src="images.image"
+                :alt="images.name"
+                class="h-24 w-24 hover:text-gray-900 dark:hover:text-white object-contain"
+              />
+            </a>
           </div>
         </div>
       </div>
@@ -499,10 +491,15 @@
           </p>
 
           <div class="flex justify-between items-center">
-            <p
+            <p v-if="event.jours === null"
               class="mb-2 text-xs font-semibold text-gray-900 whitespace-nowrap"
             >
               {{ formatDateTime(event.date_debuit) }}
+            </p>
+            <p v-else
+              class="mb-2 text-xs font-semibold text-gray-900 whitespace-nowrap"
+            >
+              Tous les {{ event.jours }} à {{ formatTime(event.date_debuit) }}
             </p>
             <p
               v-if="event.payement === 1"
@@ -524,7 +521,7 @@
             </p>
           </div>
 
-          <div class="flex">
+          <div class="flex ">
             <div class="flex text-green-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -532,7 +529,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="h-6 w-6 mt-1"
+                class="h-4 w-4 mt-1"
               >
                 <path
                   stroke-linecap="round"
@@ -545,7 +542,7 @@
                   d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
                 />
               </svg>
-              <p class="ml-1 mt-1">{{ event.nbr_reading }}</p>
+              <p class="ml-1">{{ event.nbr_reading }}</p>
             </div>
             <button @click="like(event.id)" class="flex text-green-500">
               <svg
@@ -554,7 +551,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="ml-2 h-6 w-6 mt-1"
+                class="ml-2 h-4 w-4 mt-1"
               >
                 <path
                   stroke-linecap="round"
@@ -562,17 +559,26 @@
                   d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23H5.904m10.598-9.75H14.25M5.904 18.5c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 0 1-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 9.953 4.167 9.5 5 9.5h1.053c.472 0 .745.556.5.96a8.958 8.958 0 0 0-1.302 4.665c0 1.194.232 2.333.654 3.375Z"
                 />
               </svg>
-              <p class="ml-1 mt-1">{{ event.nbr_likes }}</p>
-</button>
+              <p class="ml-1">{{ event.nbr_likes }}</p>
+            </button>
 
-            <p
-              class="text-lg font-bold text-left mt-1 ml-4"
+            <p v-if="event.jours === null"
+              class="text-sm font-bold text-left mt-0.5 ml-4"
               :class="{
                 'text-green-500': isEventInProgress(event.date_debuit),
                 'text-yellow-500': isEventUpcoming(event.date_debuit),
               }"
             >
               {{ getEventStatus(event.date_debuit) }}
+            </p>
+             <p v-else
+              class="text-sm font-bold text-left mt-0.5 ml-4 text-green-500"
+              :class="{
+                'text-green-500': isEventInProgress(event.date_debuit),
+                'text-yellow-500': isEventUpcoming(event.date_debuit),
+              }"
+            >
+              Aujourd'hui
             </p>
             <router-link
               :to="'/detailevents/' + event.id"
@@ -603,19 +609,35 @@
         v-if="selectedEvent"
         class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
       >
-        <div class="bg-white p-6 rounded-lg w-11/12 max-w-lg">
-          <!-- Image de l'événement -->
-          <!-- <img
-      v-if="selectedEvent.image"
-      :src="selectedEvent.image"
-      alt="Image de l'événement"
-      class="w-full h-48 object-cover rounded-t-lg mb-4"
-    /> -->
+        <div class="relative bg-white p-6 rounded-lg w-11/12 max-w-lg">
+          <!-- Bouton de fermeture avec SVG -->
+          <button
+            @click="closeModals"
+            class="absolute top-0 right-0  text-gray-600 hover:text-gray-900"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 bg-red-500 p-1 rounded-tr-lg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+
+          <!-- Image ou vidéo -->
           <img
-            class="transform transition duration-300 hover:scale-105 h-56 w-full rounded-lg"
             v-if="selectedEvent.image"
             :src="selectedEvent.image"
             alt="Image de l'événement"
+            class="transform transition duration-300 hover:scale-105 rounded-lg"
+            style="height: 350px; width: 500px"
           />
           <video
             v-else-if="selectedEvent.video"
@@ -634,14 +656,6 @@
             {{ formatDateTime(selectedEvent.date_debuit) }}
           </p>
           <p><strong>Description :</strong> {{ selectedEvent.description }}</p>
-
-          <!-- Bouton de fermeture -->
-          <button
-            class="mt-4 bg-red-500 text-white px-4 py-2 rounded"
-            @click="closeModals"
-          >
-            Fermer
-          </button>
         </div>
       </div>
     </div>
@@ -790,14 +804,14 @@
             </p>
           </div>
           <div class="flex">
-            <div class="flex text-green-500">
+             <div class="flex text-green-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="h-6 w-6 mt-1"
+                class="h-4 w-4 mt-1"
               >
                 <path
                   stroke-linecap="round"
@@ -810,7 +824,7 @@
                   d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
                 />
               </svg>
-              <p class="ml-1 mt-1">{{ event.nbr_reading }}</p>
+              <p class="ml-1">{{ event.nbr_reading }}</p>
             </div>
             <button @click="like(event.id)" class="flex text-green-500">
               <svg
@@ -819,7 +833,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="ml-2 h-6 w-6 mt-1"
+                class="ml-2 h-4 w-4 mt-1"
               >
                 <path
                   stroke-linecap="round"
@@ -827,10 +841,10 @@
                   d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23H5.904m10.598-9.75H14.25M5.904 18.5c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 0 1-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 9.953 4.167 9.5 5 9.5h1.053c.472 0 .745.556.5.96a8.958 8.958 0 0 0-1.302 4.665c0 1.194.232 2.333.654 3.375Z"
                 />
               </svg>
-              <p class="ml-1 mt-1">{{ event.nbr_likes }}</p>
-</button>
-            <p class="text-sm font-bold text-left text-red-500 mt-1 ml-4">
-              Terminer
+              <p class="ml-1">{{ event.nbr_likes }}</p>
+            </button>
+            <p class="text-sm font-bold text-left text-red-500 mt-0.5 ml-4">
+              Terminé
             </p>
             <router-link
               :to="'/detailevents/' + event.id"
@@ -866,19 +880,35 @@
         v-if="selectedEvent"
         class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
       >
-        <div class="bg-white p-6 rounded-lg w-11/12 max-w-lg">
-          <!-- Image de l'événement -->
-          <!-- <img
-      v-if="selectedEvent.image"
-      :src="selectedEvent.image"
-      alt="Image de l'événement"
-      class="w-full h-48 object-cover rounded-t-lg mb-4"
-    /> -->
+        <div class="relative bg-white p-6 rounded-lg w-11/12 max-w-lg">
+          
+         <button
+            @click="closeModals"
+            class="absolute top-0 right-0  text-gray-600 hover:text-gray-900"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 bg-red-500 p-1 rounded-tr-lg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+
+       
           <img
-            class="transform transition duration-300 hover:scale-105 h-56 w-full rounded-lg"
             v-if="selectedEvent.image"
             :src="selectedEvent.image"
             alt="Image de l'événement"
+            class="transform transition duration-300 hover:scale-105 rounded-lg"
+            style="height: 350px; width: 500px"
           />
           <video
             v-else-if="selectedEvent.video"
@@ -887,24 +917,16 @@
             class="w-full h-48 object-cover rounded-t-lg mb-4"
           ></video>
 
-          <!-- Titre de l'événement -->
+         
           <h2 class="text-2xl font-bold mb-4">{{ selectedEvent.name }}</h2>
 
-          <!-- Informations supplémentaires -->
+         
           <p><strong>Lieu :</strong> {{ selectedEvent.lieu }}</p>
           <p>
             <strong>Date :</strong>
             {{ formatDateTime(selectedEvent.date_debuit) }}
           </p>
           <p><strong>Description :</strong> {{ selectedEvent.description }}</p>
-
-          <!-- Bouton de fermeture -->
-          <button
-            class="mt-4 bg-red-500 text-white px-4 py-2 rounded"
-            @click="closeModals"
-          >
-            Fermer
-          </button>
         </div>
       </div>
     </div>
@@ -1125,11 +1147,11 @@ export default {
   // },
   computed: {
     filteredPublications() {
-    return this.publications.filter(event => event.status == 'valider');
-  },
-  filteredPublications2() {
-    return this.publications.filter(event => event.status == 'terminer');
-  },
+      return this.publications.filter((event) => event.status == "valider");
+    },
+    filteredPublications2() {
+      return this.publications.filter((event) => event.status == "terminer");
+    },
     // filteredEvent() {
     //   // Filtre uniquement les événements qui ont une image définie
     //   return this.videos.filter(
@@ -1197,17 +1219,19 @@ export default {
       this.carouselInterval = setInterval(() => {
         this.currentEventIndex =
           (this.currentEventIndex + 1) % this.usersdemande.length;
-      }, 3000); // 3 secondes
+      }, 6000); // 3 secondes
     },
     startCarousel() {
       setInterval(() => {
-        this.currentIndex = (this.currentIndex + 1) % this.publications.length;
+        this.currentIndex =
+          (this.currentIndex + 1) % this.filteredPublications.length;
       }, 180000);
+      
     },
     startCarousels() {
       setInterval(() => {
         this.currentIndexs =
-          (this.currentIndexs + 1) % this.publications.length;
+          (this.currentIndexs + 1) % this.filteredPublications2.length;
       }, 240000);
     },
     async getdemandeusers() {
@@ -1216,7 +1240,7 @@ export default {
         if (response.data) {
           this.usersdemande = response.data.data;
           //this.filteredDemandes = this.demandes;
-          this.startEventCarousel();
+          //this.startEventCarousel();
         }
       } catch (error) {
         console.log(error.data);
@@ -1325,6 +1349,17 @@ export default {
 
       return new Intl.DateTimeFormat("fr-FR", options).format(date);
     },
+    formatTime(dateString) { 
+  const options = {
+    hour: "2-digit",
+    minute: "2-digit",
+  };
+
+  const date = new Date(dateString);
+
+  return new Intl.DateTimeFormat("fr-FR", options).format(date);
+}
+,
     getImage(index) {
       return this.images[(this.currentIndex + index - 1) % this.images.length];
     },
@@ -1366,7 +1401,7 @@ export default {
     getEventStatus(date_debuit) {
       const today = new Date().toISOString().split("T")[0];
       const eventDate = new Date(date_debuit).toISOString().split("T")[0];
-      if (today === eventDate) return "En cours";
+      if (today === eventDate) return "Aujourd'hui";
       if (eventDate > today) return "À venir";
       return "Terminé"; // Si nécessaire
     },
