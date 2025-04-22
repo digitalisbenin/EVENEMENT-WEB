@@ -3,8 +3,7 @@
 
   <div class="bg-white">
     <!-- Row -->
-    <div class="h-9"></div>
-    <div class="lg:flex lg:mx-14 mx-6">
+    <div class="lg:flex lg:mx-14 mx-6 mt-4">
       <h1 class="text-gray-900 lg:text-3xl text-lg font-bold">
         Evénements en cours.
       </h1>
@@ -54,7 +53,7 @@
       </div>
     </div>
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-4 mt-6 lg:mx-14 mx-6"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-4 mt-4 lg:mx-14 mx-6"
     >
       <div
         v-if="filteredDemandes.length === 0"
@@ -102,7 +101,7 @@
             <p v-else
               class="mb-2 text-xs font-semibold text-gray-900 whitespace-nowrap"
             >
-              Tous les {{ event.jours }} à {{ formatTime(event.date_debuit) }}
+              Tous les {{ event.jours }}s à {{ formatTime(event.date_debuit) }}
             </p>
             <p
               v-if="event.payement === 1"
@@ -163,7 +162,7 @@
               </svg>
               <p class="ml-1">{{ event.nbr_likes }}</p>
             </button>
-            <p v-if="event.jours === null"
+           <p v-if="event.jours === null"
               class="text-sm font-bold text-left mt-0.5 ml-4"
               :class="{
                 'text-green-500': isEventInProgress(event.date_debuit),
@@ -172,18 +171,28 @@
             >
               {{ getEventStatus(event.date_debuit) }}
             </p>
-             <p v-else
-              class="text-sm font-bold text-left mt-0.5 ml-4 text-green-500"
+            <p v-if="event.jours && event.jours.toLowerCase() === currentDay.toLowerCase()"
+              class="text-sm font-bold text-left text-green-500 mt-0.5 ml-4"
               :class="{
                 'text-green-500': isEventInProgress(event.date_debuit),
                 'text-yellow-500': isEventUpcoming(event.date_debuit),
               }"
             >
-              Aujourd'hui
+              Aujourd'hui 
+            </p>
+             <p v-if="event.jours && event.jours.toLowerCase() !== currentDay.toLowerCase()"
+              class="text-sm font-bold text-left mt-0.5 ml-4 text-yellow-500"
+              :class="{
+                'text-green-500': isEventInProgress(event.date_debuit),
+                'text-yellow-500': isEventUpcoming(event.date_debuit),
+              }"
+            >
+             
+              À venir
             </p>
             <router-link
               :to="'/detailevents/' + event.id"
-              class="ml-auto bg-orangeVif flex px-2 py-1 text-white font-bold rounded-lg"
+              class="ml-auto bg-orangeVif flex items-center px-1.5 py-0.5 text-xs text-white font-semibold rounded-md"
             >
               Détail
               <svg
@@ -192,7 +201,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="cartIcon mt-1 ml-2 w-4 h-4 text-black"
+                class="ml-1 w-3.5 h-3.5 text-white"
               >
                 <path
                   stroke-linecap="round"
@@ -257,9 +266,13 @@
 
           <!-- Informations supplémentaires -->
           <p><strong>Lieu :</strong> {{ selectedEvent.lieu }}</p>
-          <p>
+          <p v-if="selectedEvent.jours === null">
             <strong>Date :</strong>
             {{ formatDateTime(selectedEvent.date_debuit) }}
+          </p>
+          <p v-else>
+            <strong>Date :</strong>
+             Tous les {{ selectedEvent.jours }} à {{ formatTime(selectedEvent.date_debuit) }}
           </p>
           <p><strong>Description :</strong> {{ selectedEvent.description }}</p>
         </div>
@@ -309,6 +322,10 @@ export default {
     },
   },
   computed: {
+     currentDay() {
+      const jours = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
+      return jours[new Date().getDay()]
+    },
     sortedBlogs() {
       // Triez les vidéos par date de création dans l'ordre décroissant
       return this.filteredDemandes

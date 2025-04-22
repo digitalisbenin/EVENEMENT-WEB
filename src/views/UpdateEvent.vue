@@ -38,6 +38,14 @@
                     <BaseInput id="lieu" v-model="demandes.lieu" class="mt-1" />
                   </div>
                 </div>
+                   <div class="col-span-8 sm:col-span-8 mb-2">
+                    <BaseLabel
+                      value="Lien maps"
+                      class="text-left font-bold"
+                    />
+                    <BaseInput id="nom" v-model="demandes.maps" class="mt-1" />
+                  </div>
+
                 <div class="col-span-8 sm:col-span-8 mb-2">
                   <BaseLabel
                     value="Description "

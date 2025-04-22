@@ -41,6 +41,17 @@
                     <BaseInput id="lieu" v-model="addform.lieu" class="mt-1" />
                   </div>
                 </div>
+                
+                  <!-- Champ "Nom de l'événement" -->
+                  <div class="col-span-8 sm:col-span-8 mb-2">
+                    <BaseLabel
+                      value="Lien maps"
+                      class="text-left font-bold"
+                    />
+                    <BaseInput id="nom" v-model="addform.maps" class="mt-1" />
+                  </div>
+
+                 
                 <div class="col-span-8 sm:col-span-8 mb-2">
                   <BaseLabel
                     value="Description "
@@ -343,6 +354,7 @@ export default {
         nombre_jour: "",
         jours: "",
         payement: "",
+        maps : "",
         montant: 0,
         status: "En attente",
       },

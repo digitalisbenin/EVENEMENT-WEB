@@ -1,10 +1,10 @@
 <template class="bg-white h-full">
   <img src="../assets/4.jpg" alt="" class="" loading="lazy" />
   <div class="bg-white">
-    <div class="h-9"></div>
-    <div class="lg:flex lg:mx-12 mx-6">
+    
+    <div class="lg:flex lg:mx-12 mx-6 mt-4">
       <h1
-        class="text-gray-900 lg:text-3xl text-lg font-bold mt-4 lg:mt-0 lg:ml-4"
+        class="text-gray-900 lg:text-3xl text-lg font-bold  lg:mt-0 lg:ml-4"
       >
         Evènements Promotionnels
       </h1>
@@ -55,7 +55,7 @@
       </div>
     </div>
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-4 mt-6 lg:mx-14 mx-6"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-4 mt-4 lg:mx-14 mx-6"
     >
       <div
         v-if="filteredDemandes.length === 0"
@@ -104,7 +104,7 @@
             <p v-else
               class="mb-2 text-xs font-semibold text-gray-900 whitespace-nowrap"
             >
-              Tous les {{ event.jours }} à {{ formatTime(event.date_debuit) }}
+              Tous les {{ event.jours }}s à {{ formatTime(event.date_debuit) }}
             </p>
             <p
               v-if="event.payement === 1"
@@ -166,7 +166,7 @@
               </svg>
               <p class="ml-1">{{ event.nbr_likes }}</p>
             </button>
-            <p v-if="event.jours === null"
+           <p v-if="event.jours === null"
               class="text-sm font-bold text-left mt-0.5 ml-4"
               :class="{
                 'text-green-500': isEventInProgress(event.date_debuit),
@@ -175,18 +175,28 @@
             >
               {{ getEventStatus(event.date_debuit) }}
             </p>
-             <p v-else
-              class="text-sm font-bold text-left mt-0.5 ml-4 text-green-500"
+            <p v-if="event.jours && event.jours.toLowerCase() === currentDay.toLowerCase()"
+              class="text-sm font-bold text-left text-green-500 mt-0.5 ml-4"
               :class="{
                 'text-green-500': isEventInProgress(event.date_debuit),
                 'text-yellow-500': isEventUpcoming(event.date_debuit),
               }"
             >
-              Aujourd'hui
+              Aujourd'hui 
+            </p>
+             <p v-if="event.jours && event.jours.toLowerCase() !== currentDay.toLowerCase()"
+              class="text-sm font-bold text-left mt-0.5 ml-4 text-yellow-500"
+              :class="{
+                'text-green-500': isEventInProgress(event.date_debuit),
+                'text-yellow-500': isEventUpcoming(event.date_debuit),
+              }"
+            >
+             
+              À venir
             </p>
             <router-link
               :to="'/detailevents/' + event.id"
-              class="ml-auto bg-orangeVif flex px-2 py-1 text-white font-bold rounded-lg"
+              class="ml-auto bg-orangeVif flex items-center px-1.5 py-0.5 text-xs text-white font-semibold rounded-md"
             >
               Détail
               <svg
@@ -195,7 +205,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="cartIcon mt-1 ml-2 w-4 h-4 text-black"
+                class="ml-1 w-3.5 h-3.5 text-white"
               >
                 <path
                   stroke-linecap="round"
@@ -254,26 +264,58 @@
 
           <!-- Informations supplémentaires -->
           <p><strong>Lieu :</strong> {{ selectedEvent.lieu }}</p>
-          <p>
+          <p v-if="selectedEvent.jours === null">
             <strong>Date :</strong>
             {{ formatDateTime(selectedEvent.date_debuit) }}
+          </p>
+          <p v-else>
+            <strong>Date :</strong>
+             Tous les {{ selectedEvent.jours }} à {{ formatTime(selectedEvent.date_debuit) }}
           </p>
           <p><strong>Description :</strong> {{ selectedEvent.description }}</p>
         </div>
       </div>
     </div>
-    <router-link
+    <!-- <router-link
       to="/eventcategoriencours/4"
       class="mx-auto mt-8 bg-orangeVif flex w-32 mb-4 justify-center items-center px-6 py-2 text-white font-bold rounded-lg shadow-md hover:bg-orange-600 transition duration-300 w-fit"
     >
       Voir plus
-    </router-link>
+    </router-link> -->
+      <section
+      class="mt-6 rounded-lg shadow-md lg:mx-14 mx-6 bg-gray-200 lg:h-16 mb-4"
+    >
+      <div class="container mx-auto px-4">
+        <div
+          class="rounded-xl p-2 flex flex-col md:flex-row items-center justify-between md:space-y-0 md:space-x-6"
+        >
+          <!-- Icon + Text -->
+
+          <div class="text-black">
+            <h3
+              class="text-xl md:text-2xl font-semibold normal-case animate-color-pulse italic"
+            >
+              Vous voulez voir plus d'événements en cours ou à venir ? Cliquez
+              ici.
+            </h3>
+          </div>
+
+          <!-- Button -->
+          <router-link
+            to="/eventcategoriencours/4"
+            class="bg-white text-[#5DAE99] font-semibold px-6 italic py-3 rounded-lg shadow-md hover:bg-gray-100 transition animate-fadeInUp flex items-center space-x-2"
+          >
+            <span>Voir plus</span>
+            <!-- <i class="fas fa-chevron-right"></i> -->
+          </router-link>
+        </div>
+      </div>
+    </section>
   </div>
   <div class="bg-white">
     <!-- Row -->
-    <div class="h-9"></div>
     <div class="lg:flex lg:mx-14 mx-6">
-      <h1 class="text-gray-900 lg:text-3xl text-lg font-bold">
+      <h1 class="text-red-500 lg:text-3xl text-lg font-bold">
         Evénements terminés.
       </h1>
       <!-- <div class="lg:ml-auto">
@@ -432,7 +474,7 @@
             </p>
             <router-link
               :to="'/detailevents/' + event.id"
-              class="ml-auto bg-orangeVif flex px-2 py-1 text-white font-bold rounded-lg"
+              class="ml-auto bg-orangeVif flex items-center px-1.5 py-0.5 text-xs text-white font-semibold rounded-md"
             >
               Détail
               <svg
@@ -441,7 +483,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="cartIcon mt-1 ml-2 w-4 h-4 text-black"
+                class="ml-1 w-3.5 h-3.5 text-white"
               >
                 <path
                   stroke-linecap="round"
@@ -506,20 +548,47 @@
 
           <!-- Informations supplémentaires -->
           <p><strong>Lieu :</strong> {{ selectedEvent.lieu }}</p>
-          <p>
+          <p v-if="selectedEvent.jours === null">
             <strong>Date :</strong>
             {{ formatDateTime(selectedEvent.date_debuit) }}
+          </p>
+          <p v-else>
+            <strong>Date :</strong>
+             Tous les {{ selectedEvent.jours }} à {{ formatTime(selectedEvent.date_debuit) }}
           </p>
           <p><strong>Description :</strong> {{ selectedEvent.description }}</p>
         </div>
       </div>
     </div>
-    <router-link
+    <!-- <router-link
       to="/eventcategorieterminer/4"
       class="mx-auto mt-8 bg-orangeVif flex w-32 mb-4 justify-center items-center px-6 py-2 text-white font-bold rounded-lg shadow-md hover:bg-orange-600 transition duration-300 w-fit"
     >
       Voir plus
-    </router-link>
+    </router-link> -->
+      <section class=" mt-6 rounded-lg shadow-md lg:mx-14 mx-6 bg-gray-200 lg:h-16 mb-6">
+  <div class="container mx-auto px-4 ">
+    <div class=" rounded-xl p-2 flex flex-col md:flex-row items-center justify-between  md:space-y-0 md:space-x-6">
+      
+      <!-- Icon + Text -->
+    
+      
+        <div class="text-white ">
+          <h3 class="text-xl md:text-2xl font-semibold normal-case animate-color-pulses italic">Vous voulez voir plus d'événements terminés ? cliquez ici. </h3>
+          <!-- <p class="text-sm">Lorem ipsum dolor sit amet, consectetur notted adipisicin</p> -->
+        </div>
+   
+
+   
+       <router-link
+      to="/eventcategorieterminer/4" class="bg-white text-[#5DAE99] font-semibold italic px-6 py-3 rounded-lg shadow-md hover:bg-gray-100 transition animate-fadeInUp flex items-center space-x-2">
+        <span>Voir plus</span>
+        <!-- <i class="fas fa-chevron-right"></i> -->
+          </router-link>
+      
+    </div>
+  </div>
+</section>
     <!-- <div class="relative w-full h-64 overflow-hidden">
       <div class="carousel">
         <div
@@ -585,6 +654,10 @@ export default {
     },
   },
   computed: {
+     currentDay() {
+      const jours = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
+      return jours[new Date().getDay()]
+    },
     sortedBlogs() {
       // Triez les vidéos par date de création dans l'ordre décroissant
       return this.filteredDemandes
@@ -914,4 +987,30 @@ export default {
   box-shadow: 0px 1px 0px rgb(139, 113, 255);
   padding-bottom: 1px;
 }
+@keyframes colorPulses {
+  0%, 49% {
+    color: #000000; /* Noir */
+  }
+  50%, 100% {
+    color: #f01010; /* Vert */
+  }
+}
+
+.animate-color-pulses {
+  animation: colorPulses 12s infinite ease-in-out;
+}
+
+@keyframes colorPulse {
+  0%, 49% {
+    color: #000000; /* Noir */
+  }
+  50%, 100% {
+    color: #17dc34; /* Vert */
+  }
+}
+
+.animate-color-pulse {
+  animation: colorPulse 12s infinite ease-in-out;
+}
+
 </style>

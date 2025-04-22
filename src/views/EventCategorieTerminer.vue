@@ -3,9 +3,8 @@
 
   <div class="bg-white">
     <!-- Row -->
-    <div class="h-9"></div>
-    <div class="lg:flex lg:mx-14 mx-6">
-      <h1 class="text-gray-900 lg:text-3xl text-lg font-bold">
+    <div class="lg:flex lg:mx-14 mx-6 mt-4">
+      <h1 class="text-red-500 lg:text-3xl text-lg font-bold">
         Evénements terminés.
       </h1>
       <div class="lg:ml-auto">
@@ -54,7 +53,7 @@
       </div>
     </div>
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-4 mt-6 lg:mx-14 mx-6"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-4 mt-4 lg:mx-14 mx-6"
     >
       <div
         v-if="filteredDemandes.length === 0"
@@ -164,7 +163,7 @@
             </p>
             <router-link
               :to="'/detailevents/' + event.id"
-              class="ml-auto bg-orangeVif flex px-2 py-1 text-white font-bold rounded-lg"
+              class="ml-auto bg-orangeVif flex items-center px-1.5 py-0.5 text-xs text-white font-semibold rounded-md"
             >
               Détail
               <svg
@@ -173,7 +172,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="cartIcon mt-1 ml-2 w-4 h-4 text-black"
+                class="ml-1 w-3.5 h-3.5 text-white"
               >
                 <path
                   stroke-linecap="round"
@@ -238,9 +237,13 @@
 
           <!-- Informations supplémentaires -->
           <p><strong>Lieu :</strong> {{ selectedEvent.lieu }}</p>
-          <p>
+          <p v-if="selectedEvent.jours === null">
             <strong>Date :</strong>
             {{ formatDateTime(selectedEvent.date_debuit) }}
+          </p>
+          <p v-else>
+            <strong>Date :</strong>
+             Tous les {{ selectedEvent.jours }} à {{ formatTime(selectedEvent.date_debuit) }}
           </p>
           <p><strong>Description :</strong> {{ selectedEvent.description }}</p>
         </div>
@@ -308,6 +311,10 @@ export default {
     },
   },
   computed: {
+     currentDay() {
+      const jours = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
+      return jours[new Date().getDay()]
+    },
     sortedBlogs() {
       // Triez les vidéos par date de création dans l'ordre décroissant
       return this.filteredDemandes

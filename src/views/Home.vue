@@ -152,7 +152,6 @@
         v-if="publications && publications.length > 0"
         class="flex-1 overflow-hidden lg:h-auto h-1/2 border-r-2 lg:border-green-500"
       >
-        <!-- Boucle pour afficher les publications -->
         <div class="" style="height: 1500; overflow: visible">
           <div class="carousel h-full">
             <div
@@ -209,7 +208,6 @@
         </div> -->
         <div
           class="relative border-b-2 border-green-500 border-r-2 border-red-500"
-          style="height: 1500px"
         >
           <img
             src="../assets/mon-sitCopie.jpg"
@@ -222,7 +220,7 @@
     </div>
   </div>
 
-  <div class="bg-white hidden sm:block">
+  <!-- <div class="bg-white hidden sm:block">
     <div class="pb-8 mt-9 lg:mx-14 mx-6">
       <div class="relative">
         <div class="flex overflow-x-auto justify-center">
@@ -242,33 +240,17 @@
         </div>
       </div>
     </div>
-    <!-- <div>
-      <div class="hidden sm:block md:w-full lg:w-full my-6">
-        <div class="flex">
-          <div
-            class="card-wrapper flex items-center justify-center"
-            ref="cardWrapper"
-          >
-            <card-component
-              v-for="(card, index) in partenaires"
-              :key="index"
-              :imageSrc="card.image"
-              class="card-slider text-center md:card-md lg:card-lg"
-            />
-          </div>
-        </div>
-      </div>
-    </div> -->
-  </div>
+    
+  </div> -->
 
-  <div class="bg-white">
+  <div class="bg-white mt-4">
     <!-- Row -->
 
     <div class="lg:flex lg:mx-14 mx-6 mt-6 lg:mt-0">
       <h1 class="text-gray-900 lg:text-3xl text-lg font-bold">
         Événements à venir ou en cours
       </h1>
-      <div class="lg:ml-auto">
+      <div class="lg:ml-auto lg:flex lg:space-x-2 lg:space-y-0 space-y-2">
         <!-- <div
           class="rounded-lg lg:ml-0 text-gray-900 p-1 border border-gray-300 bg-white overflow-hidden ring-red-300 focus:ring-4 mt-4 lg:mt-0 lg:w-96 flex items-center"
         >
@@ -311,145 +293,239 @@
             Rechercher
           </button>
         </div> -->
-        <div
-          class="bg-white poppins rounded-lg ring-red-300 transform transition duration-700 mt-1 ml-2"
-          @click="toggleDropdownsfil"
-        >
-          <!-- Dropdown Toggle Button -->
-          <button
-            type="button"
-            class="relative flex rounded-md px-4 py-2 border border-gray-300"
-            id="user-menu-button"
-            aria-expanded="false"
-            aria-haspopup="true"
-          >
-            <svg
-              width="24"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+        <div v-show="isDropdownOpenPrfile" class="lg:px-4 lg:flex lg:space-x-2 lg:space-y-0 space-y-2">
+          <!-- Ville Section -->
+          <div>
+            <!-- <label class="block text-sm font-bold mb-2">Ville</label> -->
+            <div
+              class="flex items-center rounded-lg border border-gray-300 bg-white p-2"
             >
-              <path
-                d="M6 12h12M2.25 7.5h19.5M9.75 16.5h4.5"
-                stroke="#1A202C"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+              <input
+                type="text"
+                v-model="filter"
+                @click.stop
+                class="w-full rounded-lg px-4 focus:outline-none bg-white text-gray-900"
+                placeholder="Rechercher par Ville"
               />
-            </svg>
-            <span class="ml-2">Filtre</span>
-          </button>
-
-          <!-- Dropdown Menu -->
-          <div
-            v-show="isDropdownOpenPrfile"
-            class="absolute right-0 z-10 bottom-full mb-2 origin-bottom-right rounded-md bg-white w-64 py-1 shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none"
-            role="menu"
-            aria-orientation="vertical"
-            aria-labelledby="user-menu-button"
-            tabindex="-1"
-          >
-            <!-- Dropdown Content -->
-            <div class="space-y-4 px-4">
-              <!-- Ville Section -->
-              <div>
-                <label class="block text-sm font-bold mb-2">Ville</label>
-                <div
-                  class="flex items-center rounded-lg border border-gray-300 bg-white p-2"
+              <button
+                v-if="filter"
+                type="button"
+                @click="clearSearch"
+                class="flex items-center justify-center w-8 h-8 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-400 mr-2"
+                aria-label="Clear"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  class="w-4 h-4 text-red-500"
                 >
-                  <input
-                    type="text"
-                    v-model="filter"
-                    @click.stop
-                    class="w-full rounded-lg px-4 focus:outline-none bg-white text-gray-900"
-                    placeholder="Rechercher"
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
                   />
-                  <button
-                    v-if="filter"
-                    type="button"
-                    @click="clearSearch"
-                    class="flex items-center justify-center w-8 h-8 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-400 mr-2"
-                    aria-label="Clear"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="2"
-                      stroke="currentColor"
-                      class="w-4 h-4 text-red-500"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
-                  <button
-                    type="button"
-                    @click="searchAction"
-                    class="flex items-center justify-center px-4 h-8 rounded-lg bg-orangeVif hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
-                    aria-label="Search"
-                  >
-                    Valider
-                  </button>
-                </div>
-              </div>
-
-              <!-- Categorie Section -->
-              <div>
-                <label class="block text-sm font-bold mb-2">Categorie</label>
-                <div
-                  class="flex items-center rounded-lg border border-gray-300 bg-white p-2"
-                >
-                  <input
-                    type="text"
-                    v-model="filters"
-                    @click.stop
-                    class="w-full rounded-lg px-4 focus:outline-none bg-white text-gray-900"
-                    placeholder="Rechercher"
-                  />
-                  <button
-                    v-if="filters"
-                    type="button"
-                    @click="clearSearchs"
-                    class="flex items-center justify-center w-8 h-8 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-400 mr-2"
-                    aria-label="Clear"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="2"
-                      stroke="currentColor"
-                      class="w-4 h-4 text-red-500"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
-                  <button
-                    type="button"
-                    @click="searchActions"
-                    class="flex items-center justify-center px-4 h-8 rounded-lg bg-orangeVif hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
-                    aria-label="Search"
-                  >
-                    Valider
-                  </button>
-                </div>
-              </div>
+                </svg>
+              </button>
+              <button
+                type="button"
+                @click="searchAction"
+                class="flex items-center justify-center px-4 h-8 rounded-lg bg-orangeVif hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                aria-label="Search"
+              >
+                Valider
+              </button>
             </div>
           </div>
+
+          <!-- Categorie Section -->
+          <div>
+            <!-- <label class="block text-sm font-bold mb-2">Categorie</label> -->
+            <div
+              class="flex items-center rounded-lg border border-gray-300 bg-white p-2"
+            >
+              <input
+                type="text"
+                v-model="filters"
+                @click.stop
+                class="w-full rounded-lg px-4 focus:outline-none bg-white text-gray-900"
+                placeholder="Rechercher par Categorie"
+              />
+              <button
+                v-if="filters"
+                type="button"
+                @click="clearSearchs"
+                class="flex items-center justify-center w-8 h-8 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-400 mr-2"
+                aria-label="Clear"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  class="w-4 h-4 text-red-500"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+              <button
+                type="button"
+                @click="searchActions"
+                class="flex items-center justify-center px-4 h-8 rounded-lg bg-orangeVif hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                aria-label="Search"
+              >
+                Valider
+              </button>
+            </div>
+          </div>
+         
         </div>
+         <div
+            class="bg-white poppins rounded-lg ring-red-300 transform transition duration-700   "
+            @click="toggleDropdownsfil"
+          >
+            <!-- Dropdown Toggle Button -->
+            <button
+              type="button"
+              class="relative flex rounded-md px-4 py-3 border border-gray-300"
+              id="user-menu-button"
+              aria-expanded="false"
+              aria-haspopup="true"
+            >
+              <svg
+                width="24"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 12h12M2.25 7.5h19.5M9.75 16.5h4.5"
+                  stroke="#1A202C"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <span class="ml-2">Recherche</span>
+            </button>
+
+            <!-- Dropdown Menu -->
+            <!-- <div
+              v-show="isDropdownOpenPrfile"
+              class="absolute right-0 z-10 bottom-full mb-2 origin-bottom-right rounded-md bg-white w-64 py-1 shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="user-menu-button"
+              tabindex="-1"
+            >
+             
+              <div class="space-y-4 px-4">
+               
+                <div>
+                
+                  <div
+                    class="flex items-center rounded-lg border border-gray-300 bg-white p-2"
+                  >
+                    <input
+                      type="text"
+                      v-model="filter"
+                      @click.stop
+                      class="w-full rounded-lg px-4 focus:outline-none bg-white text-gray-900"
+                      placeholder="Rechercher par Ville"
+                    />
+                    <button
+                      v-if="filter"
+                      type="button"
+                      @click="clearSearch"
+                      class="flex items-center justify-center w-8 h-8 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-400 mr-2"
+                      aria-label="Clear"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        class="w-4 h-4 text-red-500"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </button>
+                    <button
+                      type="button"
+                      @click="searchAction"
+                      class="flex items-center justify-center px-4 h-8 rounded-lg bg-orangeVif hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                      aria-label="Search"
+                    >
+                      Valider
+                    </button>
+                  </div>
+                </div>
+
+             
+                <div>
+                 
+                  <div
+                    class="flex items-center rounded-lg border border-gray-300 bg-white p-2"
+                  >
+                    <input
+                      type="text"
+                      v-model="filters"
+                      @click.stop
+                      class="w-full rounded-lg px-4 focus:outline-none bg-white text-gray-900"
+                      placeholder="Rechercher Categorie"
+                    />
+                    <button
+                      v-if="filters"
+                      type="button"
+                      @click="clearSearchs"
+                      class="flex items-center justify-center w-8 h-8 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-400 mr-2"
+                      aria-label="Clear"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        class="w-4 h-4 text-red-500"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </button>
+                    <button
+                      type="button"
+                      @click="searchActions"
+                      class="flex items-center justify-center px-4 h-8 rounded-lg bg-orangeVif hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                      aria-label="Search"
+                    >
+                      Valider
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+          </div>
       </div>
     </div>
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-4 mt-6 lg:mx-14 mx-6"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-4 mt-4 lg:mx-14 mx-6"
     >
       <div
         v-if="filteredDemandes.length === 0"
@@ -491,15 +567,17 @@
           </p>
 
           <div class="flex justify-between items-center">
-            <p v-if="event.jours === null"
+            <p
+              v-if="event.jours === null"
               class="mb-2 text-xs font-semibold text-gray-900 whitespace-nowrap"
             >
               {{ formatDateTime(event.date_debuit) }}
             </p>
-            <p v-else
+            <p
+              v-else
               class="mb-2 text-xs font-semibold text-gray-900 whitespace-nowrap"
             >
-              Tous les {{ event.jours }} à {{ formatTime(event.date_debuit) }}
+              Tous les {{ event.jours }}s à {{ formatTime(event.date_debuit) }}
             </p>
             <p
               v-if="event.payement === 1"
@@ -521,7 +599,7 @@
             </p>
           </div>
 
-          <div class="flex ">
+          <div class="flex">
             <div class="flex text-green-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -562,8 +640,9 @@
               <p class="ml-1">{{ event.nbr_likes }}</p>
             </button>
 
-            <p v-if="event.jours === null"
-              class="text-sm font-bold text-left mt-0.5 ml-4"
+            <p
+              v-if="event.jours === null"
+              class="text-sm font-bold text-left mt-0.5 ml-2"
               :class="{
                 'text-green-500': isEventInProgress(event.date_debuit),
                 'text-yellow-500': isEventUpcoming(event.date_debuit),
@@ -571,8 +650,12 @@
             >
               {{ getEventStatus(event.date_debuit) }}
             </p>
-             <p v-else
-              class="text-sm font-bold text-left mt-0.5 ml-4 text-green-500"
+            <p
+              v-if="
+                event.jours &&
+                event.jours.toLowerCase() === currentDay.toLowerCase()
+              "
+              class="text-sm font-bold text-left text-green-500 mt-0.5 ml-2"
               :class="{
                 'text-green-500': isEventInProgress(event.date_debuit),
                 'text-yellow-500': isEventUpcoming(event.date_debuit),
@@ -580,9 +663,22 @@
             >
               Aujourd'hui
             </p>
+            <p
+              v-if="
+                event.jours &&
+                event.jours.toLowerCase() !== currentDay.toLowerCase()
+              "
+              class="text-sm font-bold text-left mt-0.5 ml-2 text-yellow-500"
+              :class="{
+                'text-green-500': isEventInProgress(event.date_debuit),
+                'text-yellow-500': isEventUpcoming(event.date_debuit),
+              }"
+            >
+              À venir
+            </p>
             <router-link
               :to="'/detailevents/' + event.id"
-              class="ml-auto bg-orangeVif flex px-2 py-1 text-white font-bold rounded-lg"
+              class="ml-auto bg-orangeVif flex items-center px-1.5 py-0.5 text-xs text-white font-semibold rounded-md"
             >
               Détail
               <svg
@@ -591,7 +687,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="cartIcon mt-1 ml-2 w-4 h-4 text-black"
+                class="ml-1 w-3.5 h-3.5 text-white"
               >
                 <path
                   stroke-linecap="round"
@@ -613,7 +709,7 @@
           <!-- Bouton de fermeture avec SVG -->
           <button
             @click="closeModals"
-            class="absolute top-0 right-0  text-gray-600 hover:text-gray-900"
+            class="absolute top-0 right-0 text-gray-600 hover:text-gray-900"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -651,20 +747,55 @@
 
           <!-- Informations supplémentaires -->
           <p><strong>Lieu :</strong> {{ selectedEvent.lieu }}</p>
-          <p>
+          <p v-if="selectedEvent.jours === null">
             <strong>Date :</strong>
             {{ formatDateTime(selectedEvent.date_debuit) }}
+          </p>
+          <p v-else>
+            <strong>Date :</strong>
+            Tous les {{ selectedEvent.jours }} à
+            {{ formatTime(selectedEvent.date_debuit) }}
           </p>
           <p><strong>Description :</strong> {{ selectedEvent.description }}</p>
         </div>
       </div>
     </div>
-    <router-link
+
+    <!-- <router-link
       to="/eventsencours"
       class="mx-auto mt-8 bg-orangeVif flex w-32 mb-4 justify-center items-center px-6 py-2 text-white font-bold rounded-lg shadow-md hover:bg-orange-600 transition duration-300 w-fit"
     >
       Voir plus
-    </router-link>
+    </router-link> -->
+    <section
+      class="mt-6 rounded-lg shadow-md lg:mx-14 mx-6 bg-gray-200 lg:h-16"
+    >
+      <div class="container mx-auto px-4">
+        <div
+          class="rounded-xl p-2 flex flex-col md:flex-row items-center justify-between md:space-y-0 md:space-x-6"
+        >
+          <!-- Icon + Text -->
+
+          <div class="text-black">
+            <h3
+              class="text-xl md:text-2xl font-semibold normal-case animate-color-pulse italic"
+            >
+              Vous voulez voir plus d'événements en cours ou à venir ? Cliquez
+              ici.
+            </h3>
+          </div>
+
+          <!-- Button -->
+          <router-link
+            to="/eventsencours"
+            class="bg-white text-[#5DAE99] font-semibold px-6 italic py-3 rounded-lg shadow-md hover:bg-gray-100 transition animate-fadeInUp flex items-center space-x-2"
+          >
+            <span>Voir plus</span>
+            <!-- <i class="fas fa-chevron-right"></i> -->
+          </router-link>
+        </div>
+      </div>
+    </section>
     <!-- <div class="relative w-full h-64 overflow-hidden">
       <div class="carousel">
         <div
@@ -684,11 +815,11 @@
     <!-- Row -->
   </div>
 
-  <div class="bg-white">
+  <div class="bg-white mt-6">
     <!-- Row -->
-    <div class="h-9"></div>
+
     <div class="lg:flex lg:mx-14 mx-6">
-      <h1 class="text-gray-900 lg:text-3xl text-lg font-bold">
+      <h1 class="text-red-500 lg:text-3xl text-lg font-bold">
         Evénements terminés.
       </h1>
       <!-- <div class="lg:ml-auto">
@@ -804,7 +935,7 @@
             </p>
           </div>
           <div class="flex">
-             <div class="flex text-green-500">
+            <div class="flex text-green-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -848,7 +979,7 @@
             </p>
             <router-link
               :to="'/detailevents/' + event.id"
-              class="ml-auto bg-orangeVif flex px-2 py-1 text-white font-bold rounded-lg"
+              class="ml-auto bg-orangeVif flex items-center px-1.5 py-0.5 text-xs text-white font-semibold rounded-md"
             >
               Détail
               <svg
@@ -857,7 +988,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="cartIcon mt-1 ml-2 w-4 h-4 text-black"
+                class="ml-1 w-3.5 h-3.5 text-white"
               >
                 <path
                   stroke-linecap="round"
@@ -881,10 +1012,9 @@
         class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
       >
         <div class="relative bg-white p-6 rounded-lg w-11/12 max-w-lg">
-          
-         <button
+          <button
             @click="closeModals"
-            class="absolute top-0 right-0  text-gray-600 hover:text-gray-900"
+            class="absolute top-0 right-0 text-gray-600 hover:text-gray-900"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -902,7 +1032,6 @@
             </svg>
           </button>
 
-       
           <img
             v-if="selectedEvent.image"
             :src="selectedEvent.image"
@@ -917,25 +1046,57 @@
             class="w-full h-48 object-cover rounded-t-lg mb-4"
           ></video>
 
-         
           <h2 class="text-2xl font-bold mb-4">{{ selectedEvent.name }}</h2>
 
-         
           <p><strong>Lieu :</strong> {{ selectedEvent.lieu }}</p>
-          <p>
+          <p v-if="selectedEvent.jours === null">
             <strong>Date :</strong>
             {{ formatDateTime(selectedEvent.date_debuit) }}
+          </p>
+          <p v-else>
+            <strong>Date :</strong>
+            Tous les {{ selectedEvent.jours }} à
+            {{ formatTime(selectedEvent.date_debuit) }}
           </p>
           <p><strong>Description :</strong> {{ selectedEvent.description }}</p>
         </div>
       </div>
     </div>
-    <router-link
+    <!-- <router-link
       to="/eventsterminer"
       class="mx-auto mt-8 bg-orangeVif flex w-32 mb-4 justify-center items-center px-6 py-2 text-white font-bold rounded-lg shadow-md hover:bg-orange-600 transition duration-300 w-fit"
     >
       Voir plus
-    </router-link>
+    </router-link> -->
+    <section
+      class="mt-6 rounded-lg shadow-md lg:mx-14 mx-6 bg-gray-200 lg:h-16"
+    >
+      <div class="container mx-auto px-4">
+        <div
+          class="rounded-xl p-2 flex flex-col md:flex-row items-center justify-between md:space-y-0 md:space-x-6"
+        >
+          <!-- Icon + Text -->
+
+          <div class="text-white">
+            <h3
+              class="text-xl md:text-2xl font-semibold normal-case animate-color-pulses italic"
+            >
+              Vous voulez voir plus d'événements terminés ? cliquez ici.
+            </h3>
+            <!-- <p class="text-sm">Lorem ipsum dolor sit amet, consectetur notted adipisicin</p> -->
+          </div>
+
+          <router-link
+            to="/eventsterminer"
+            class="bg-white text-[#5DAE99] font-semibold italic px-6 py-3 rounded-lg shadow-md hover:bg-gray-100 transition animate-fadeInUp flex items-center space-x-2"
+          >
+            <span>Voir plus</span>
+            <!-- <i class="fas fa-chevron-right"></i> -->
+          </router-link>
+        </div>
+      </div>
+    </section>
+
     <!-- <div class="relative w-full h-64 overflow-hidden">
       <div class="carousel">
         <div
@@ -1030,7 +1191,7 @@
     </div>
   </div> -->
   <div class="bg-white">
-    <div class="h-9"></div>
+    <div class="h-4"></div>
     <div class="text-center">
       <h2 class="lg:text-3xl text-lg font-mono text-gray-900">TEMOIGNAGES</h2>
     </div>
@@ -1094,6 +1255,7 @@ export default {
     //CardComponent,
     //VideoPlayer,
   },
+
   data() {
     return {
       isModalOpen: false,
@@ -1138,7 +1300,7 @@ export default {
     this.getdemande();
     this.getemoignage();
 
-    this.getPartenaire();
+    //this.getPartenaire();
     this.getdemandeTermine();
     //this.startAutoScroll();
   },
@@ -1146,6 +1308,18 @@ export default {
   //   clearInterval(this.scrollInterval);
   // },
   computed: {
+    currentDay() {
+      const jours = [
+        "Dimanche",
+        "Lundi",
+        "Mardi",
+        "Mercredi",
+        "Jeudi",
+        "Vendredi",
+        "Samedi",
+      ];
+      return jours[new Date().getDay()];
+    },
     filteredPublications() {
       return this.publications.filter((event) => event.status == "valider");
     },
@@ -1226,7 +1400,6 @@ export default {
         this.currentIndex =
           (this.currentIndex + 1) % this.filteredPublications.length;
       }, 180000);
-      
     },
     startCarousels() {
       setInterval(() => {
@@ -1349,17 +1522,16 @@ export default {
 
       return new Intl.DateTimeFormat("fr-FR", options).format(date);
     },
-    formatTime(dateString) { 
-  const options = {
-    hour: "2-digit",
-    minute: "2-digit",
-  };
+    formatTime(dateString) {
+      const options = {
+        hour: "2-digit",
+        minute: "2-digit",
+      };
 
-  const date = new Date(dateString);
+      const date = new Date(dateString);
 
-  return new Intl.DateTimeFormat("fr-FR", options).format(date);
-}
-,
+      return new Intl.DateTimeFormat("fr-FR", options).format(date);
+    },
     getImage(index) {
       return this.images[(this.currentIndex + index - 1) % this.images.length];
     },
@@ -1647,5 +1819,34 @@ export default {
   transform: translate(2px, 0px);
   box-shadow: 0px 1px 0px rgb(139, 113, 255);
   padding-bottom: 1px;
+}
+@keyframes colorPulse {
+  0%,
+  49% {
+    color: #000000; /* Noir */
+  }
+  50%,
+  100% {
+    color: #17dc34; /* Vert */
+  }
+}
+
+.animate-color-pulse {
+  animation: colorPulse 12s infinite ease-in-out;
+}
+
+@keyframes colorPulses {
+  0%,
+  49% {
+    color: #000000; /* Noir */
+  }
+  50%,
+  100% {
+    color: #f01010; /* Vert */
+  }
+}
+
+.animate-color-pulses {
+  animation: colorPulses 12s infinite ease-in-out;
 }
 </style>

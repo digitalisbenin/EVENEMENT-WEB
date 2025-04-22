@@ -1,8 +1,5 @@
 <template>
-  <nav
-    class="h-16 shadow border-b-2 border-orangeVif"
-    style="background: #001928"
-  >
+  <nav class="h-16 shadow border-b-2 border-orangeVif" style="background: #fff">
     <div class="container flex relative items-center">
       <!-- Logo -->
       <div class="flex">
@@ -22,7 +19,7 @@
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="w-6 h-6 text-white"
+            class="w-6 h-6 text-black"
           >
             <path
               stroke-linecap="round"
@@ -37,12 +34,12 @@
         class="w-44 absolute z-20 top-10 border-b-8 border-yellow-400 ml-36"
         style="background: #013854"
       >
-        <ul class="list-none text-white mt-9">
+        <ul class="list-none text-white mt-9 font-serif font-bold italic">
           <li
             @click="toggDropdownMobile"
             class="flex items-center justify-center"
           >
-            <router-link class="text-white" active-class="active-link" to="/">
+            <router-link class="text-white  " active-class="active-link" to="/">
               <span
                 style="
                   text-decoration-color: rgb(250 204 21);
@@ -166,56 +163,16 @@
               ></router-link
             >
           </li>
-          <li @click="toggDropdown" class="flex items-center justify-center mt-6">
-            <a
-              href="https://www.facebook.com/share/15VgW3BDHU/"
-              target="_blank"
-              class="text-white hover:text-green-500"
-            >
-              <i class="fab fa-facebook-square text-2xl"
-                ><svg
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  class="h-6 w-6"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                    clip-rule="evenodd"
-                  ></path></svg
-              ></i>
-            </a>
-          </li>
 
-          <li @click="toggDropdown" class="flex items-center justify-center mt-6">
-            <a href="#" target="_blank" class="text-white hover:text-green-500">
-              <i class="fab fa-tiktok text-2xl"
-                ><svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  class="h-6 w-6"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z"
-                  /></svg
-              ></i>
-            </a>
-          </li>
           <div class="flex items-center justify-center mt-6">
             <router-link
               v-if="this.user === undefined || this.user === ''"
-              class="py-1 text-white px-4 poppins rounded-lg ring-red-300 focus:outline-none focus:ring-4 transform transition duration-700 hover:scale-105"
+              class="py-1 text-white px-4 poppins rounded-lg ring-red-300 focus:outline-none focus:ring-4 transform transition duration-700 hover:scale-105 italic"
               to="/auth/login"
               >Se connecter</router-link
             >
-            <div
-              v-else
-              class="bg-white px-4 py-1 border border-green-500 text-white ml-12 poppins rounded-lg ring-red-300 transform transition duration-700 mt-1 ml-2"
-              @click="toggleDropdownsfil"
-            >
-              <button
+            <div v-else>
+              <!-- <button
                 type="button"
                 class="relative flex rounded-full text-sm"
                 id="user-menu-button"
@@ -241,20 +198,20 @@
                     clip-rule="evenodd"
                   />
                 </svg>
-              </button>
+              </button> -->
 
               <!-- Dropdown menu -->
-              <div
+              <!-- <div
                 v-show="isDropdownOpenPrfile"
                 class="absolute right-0 z-10 mt-1 origin-top-right rounded-md bg-white w-48 py-1 shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none"
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="user-menu-button"
                 tabindex="-1"
-              >
-                <!-- Active: "bg-gray-100", Not Active: "" -->
+              > -->
+              <!-- Active: "bg-gray-100", Not Active: "" -->
 
-                <router-link
+              <!-- <router-link
                   class="block px-4 py-2 flex text-sm text-black font-bold"
                   @click="isOpen = !isOpen"
                   role="menuitem"
@@ -283,16 +240,17 @@
                 >
                 <h1
                   class="text-xl font-bold border border-yellow-400 ml-4"
-                ></h1>
-                <router-link
-                  class="block px-4 py-2 flex text-sm text-black font-bold"
-                  @click="isOpen = !isOpen"
-                  role="menuitem"
-                  tabindex="-1"
-                  id="user-menu-item-1"
-                  to="/mesevents"
-                >
-                  <svg
+                ></h1> -->
+              <router-link
+                class="text-white ml-4 whitespace-nowrap"
+                 active-class="active-link"
+                @click="isOpen = !isOpen"
+                role="menuitem"
+                tabindex="-1"
+                id="user-menu-item-1"
+                to="/mesevents"
+              >
+                <!-- <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -305,21 +263,26 @@
                       stroke-linejoin="round"
                       d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
                     />
-                  </svg>
-                  <span
-                    class="ml-2 text-blue-800 font-bold font-serif hover:text-blue-900"
-                    >Mes evenements</span
-                  ></router-link
-                >
+                  </svg> -->
+                <span
+                  style="
+                    text-decoration-color: rgb(250 204 21);
+                    margin-bottom: 2px;
+                  "
+                  class="hover:text-green-500"
+                  >Mes evenements</span
+                ></router-link
+              >
 
-                <button
-                  @click="logout()"
-                  class="block px-4 py-2 flex text-sm mt-2"
-                  role="menuitem"
-                  tabindex="-1"
-                  id="user-menu-item-2"
-                >
-                  <svg
+              <button
+                @click="logout()"
+                class="block px-4  text-center mt-6 text-lg"
+                 active-class="active-link"
+                role="menuitem"
+                tabindex="-1"
+                id="user-menu-item-2"
+              >
+                <!-- <svg
                     width="15"
                     height="23"
                     viewBox="0 0 15 23"
@@ -333,28 +296,71 @@
                       d="M3.58739 1.80188L7.86025 1.13043C11.0808 0.624343 12.6911 0.371297 13.7414 1.26942C14.7917 2.16754 14.7917 3.79759 14.7917 7.0577V10.4995H8.53897L11.4059 6.91591L9.84414 5.66652L5.67747 10.8748L5.17772 11.4995L5.67747 12.1242L9.84414 17.3326L11.4059 16.0832L8.53897 12.4995H14.7917V15.9414C14.7917 19.2015 14.7917 20.8316 13.7414 21.7297C12.6911 22.6278 11.0808 22.3747 7.86025 21.8687L3.58739 21.1972C1.97466 20.9438 1.16829 20.8171 0.688319 20.2558C0.208344 19.6945 0.208344 18.8782 0.208344 17.2457V5.7534C0.208344 4.12087 0.208344 3.30461 0.688319 2.74332C1.16829 2.18203 1.97466 2.05531 3.58739 1.80188Z"
                       fill="#001928"
                     />
-                  </svg>
+                  </svg> -->
 
-                  <span
-                    class="ml-2 text-blue-800 font-bold font-serif hover:text-blue-900"
-                    >Déconnexion</span
-                  >
-                </button>
-              </div>
+                <span
+                  class="ml-2 text-white  font-bold font-serif hover:text-blue-900 italic"
+                  >Déconnexion</span
+                >
+              </button>
+              <!-- </div> -->
             </div>
           </div>
+          <li
+            @click="toggDropdown"
+            class="flex items-center justify-center mt-6"
+          >
+            <a
+              href="https://www.facebook.com/share/15VgW3BDHU/"
+              target="_blank"
+              class="text-white hover:text-green-500"
+            >
+              <i class="fab fa-facebook-square text-2xl"
+                ><svg
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  class="h-6 w-6"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                    clip-rule="evenodd"
+                  ></path></svg
+              ></i>
+            </a>
+          </li>
+
+          <li
+            @click="toggDropdown"
+            class="flex items-center justify-center mt-6"
+          >
+            <a href="#" target="_blank" class="text-white hover:text-green-500">
+              <i class="fab fa-tiktok text-2xl"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  class="h-6 w-6"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z"
+                  /></svg
+              ></i>
+            </a>
+          </li>
         </ul>
       </div>
       <!-- Menu -->
       <ul
         :class="{ hidden: !isMobileMenuOpen }"
-        class="lg:flex lg:space-x-6 lg:text-lg ml-24 font-sans font-bold"
+        class="lg:flex lg:space-x-4 lg:text-lg ml-32 font-serif font-bold italic "
       >
         <li @click="toggDropdown">
           <router-link class="text-white" active-class="active-link" to="/">
             <span
               style="text-decoration-color: rgb(250 204 21); margin-bottom: 2px"
-              class="hover:text-green-500"
+              class="hover:text-green-500 text-black text-2xl"
               >Accueil</span
             ></router-link
           >
@@ -362,12 +368,12 @@
 
         <li @click="toggDropdown">
           <router-link
-            class="text-white ml-4 whitespace-nowrap"
+            class="text-white whitespace-nowrap"
             active-class="active-link"
             to="/shows/1"
             ><span
               style="text-decoration-color: rgb(250 204 21); margin-bottom: 2px"
-              class="hover:text-green-500"
+              class="hover:text-green-500 text-black text-2xl"
               >Show</span
             ></router-link
           >
@@ -375,25 +381,25 @@
 
         <li @click="toggDropdown">
           <router-link
-            class="text-white ml-4 whitespace-nowrap"
+            class="text-white ml-2 whitespace-nowrap"
             active-class="active-link"
             to="/concert/2"
             ><span
               style="text-decoration-color: rgb(250 204 21); margin-bottom: 2px"
-              class="hover:text-green-500"
+              class="hover:text-green-500 text-black text-2xl"
               >Concert</span
             ></router-link
           >
         </li>
         <li @click="toggDropdown">
           <router-link
-            class="text-white ml-4 whitespace-nowrap"
+            class="text-white ml-2 whitespace-nowrap"
             to="/foires/3"
             active-class="active-link"
           >
             <span
               style="text-decoration-color: rgb(250 204 21); margin-bottom: 2px"
-              class="hover:text-green-500"
+              class="hover:text-green-500 text-black text-2xl"
             >
               Foire
             </span>
@@ -402,12 +408,12 @@
 
         <li @click="toggDropdown">
           <router-link
-            class="text-white ml-4 whitespace-nowrap"
+            class="text-white ml-2 whitespace-nowrap"
             active-class="active-link"
             to="/promotions/4"
             ><span
               style="text-decoration-color: rgb(250 204 21); margin-bottom: 2px"
-              class="hover:text-green-500"
+              class="hover:text-green-500 text-black text-2xl"
             >
               Promotion</span
             ></router-link
@@ -415,78 +421,42 @@
         </li>
         <li @click="toggDropdown">
           <router-link
-            class="text-white ml-4 whitespace-nowrap"
+            class="text-white ml-2 whitespace-nowrap"
             active-class="active-link"
             to="/autres"
             ><span
               style="text-decoration-color: rgb(250 204 21); margin-bottom: 2px"
-              class="hover:text-green-500"
+              class="hover:text-green-500 text-black text-2xl"
               >Autres</span
             ></router-link
           >
         </li>
         <li @click="toggDropdown">
           <router-link
-            class="text-white ml-4 whitespace-nowrap"
+            class="text-white ml-2 whitespace-nowrap"
             active-class="active-link"
             to="/contact"
             ><span
               style="text-decoration-color: rgb(250 204 21); margin-bottom: 2px"
-              class="hover:text-green-500"
+              class="hover:text-green-500 text-black text-2xl"
               >Contacts</span
             ></router-link
           >
         </li>
-        <li @click="toggDropdown" class="ml-4">
-          <a
-            href="https://www.facebook.com/share/15VgW3BDHU/"
-            target="_blank"
-            class="text-white hover:text-green-500"
-          >
-            <i class="fab fa-facebook-square text-2xl"
-              ><svg
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                class="h-6 w-6"
-                aria-hidden="true"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                  clip-rule="evenodd"
-                ></path></svg
-            ></i>
-          </a>
-        </li>
 
-        <li @click="toggDropdown" class="ml-4">
-          <a href="#" target="_blank" class="text-white hover:text-green-500">
-            <i class="fab fa-tiktok text-2xl"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                class="h-6 w-6"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z"
-                /></svg
-            ></i>
-          </a>
-        </li>
         <!-- Ajoutez les autres éléments de menu ici -->
 
         <!-- Sign in -->
         <li class="hidden lg:block">
           <router-link
             v-if="this.user === undefined || this.user === ''"
-            class="py-1 bg-green-400 text-white ml-12 px-4 poppins rounded-lg ring-red-300 focus:outline-none focus:ring-4 transform transition duration-700 hover:scale-105"
+            class="py-1 bg-green-400 text-white ml-12 px-4 poppins rounded-lg ring-red-300 focus:outline-none focus:ring-4 transform transition duration-700 hover:scale-105 text-2xl"
             to="/auth/login"
             >Se connecter</router-link
           >
           <div
             v-else
-            class="lg:flex lg:space-x-6 lg:text-lg font-sans font-bold"
+            class="lg:flex lg:space-x-4 lg:text-lg font-serif font-bold italic"
           >
             <!-- <button
                 type="button"
@@ -563,7 +533,7 @@
                   text-decoration-color: rgb(250 204 21);
                   margin-bottom: 2px;
                 "
-                class="hover:text-green-500"
+                class="hover:text-green-500 text-black text-2xl"
                 >Mes evenements</span
               ></router-link
             >
@@ -595,11 +565,48 @@
                   text-decoration-color: rgb(250 204 21);
                   margin-bottom: 2px;
                 "
-                class="hover:text-green-500"
+                class="hover:text-green-500 text-black italic text-2xl"
                 >Déconnexion</span
               >
             </button>
           </div>
+        </li>
+        <li @click="toggDropdown" class="ml-4">
+          <a
+            href="https://www.facebook.com/share/15VgW3BDHU/"
+            target="_blank"
+            class="text-black hover:text-green-500"
+          >
+            <i class="fab fa-facebook-square text-2xl"
+              ><svg
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                class="h-5 w-5 mt-1"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                  clip-rule="evenodd"
+                ></path></svg
+            ></i>
+          </a>
+        </li>
+
+        <li @click="toggDropdown" class="ml-4">
+          <a href="#" target="_blank" class="text-black hover:text-green-500">
+            <i class="fab fa-tiktok text-2xl"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                class="h-4 w-4 mt-1"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z"
+                /></svg
+            ></i>
+          </a>
         </li>
       </ul>
     </div>

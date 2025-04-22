@@ -37,13 +37,40 @@
           </div>
           <div class="w-full flex-none text-lg font-medium text-green-500 mt-2">
             <p
-              class="text-lg font-bold text-left mt-1"
+              v-if="demandes.jours === null"
+              class="text-lg font-bold text-left mt-0.5"
               :class="{
                 'text-green-500': isEventInProgress(demandes.date_debuit),
                 'text-yellow-500': isEventUpcoming(demandes.date_debuit),
               }"
             >
               {{ getEventStatus(demandes.date_debuit) }}
+            </p>
+            <p
+              v-if="
+                demandes.jours &&
+                demandes.jours.toLowerCase() === currentDay.toLowerCase()
+              "
+              class="text-lg font-bold text-left text-green-500 mt-0.5"
+              :class="{
+                'text-green-500': isEventInProgress(demandes.date_debuit),
+                'text-yellow-500': isEventUpcoming(demandes.date_debuit),
+              }"
+            >
+              Aujourd'hui
+            </p>
+            <p
+              v-if="
+                demandes.jours &&
+                demandes.jours.toLowerCase() !== currentDay.toLowerCase()
+              "
+              class="text-lg font-bold text-left mt-0.5 text-yellow-500"
+              :class="{
+                'text-green-500': isEventInProgress(demandes.date_debuit),
+                'text-yellow-500': isEventUpcoming(demandes.date_debuit),
+              }"
+            >
+              À venir
             </p>
           </div>
         </div>
@@ -53,8 +80,14 @@
               {{ demandes.description }}
             </label>
           </div>
-          <div class="space-x-2 text-lg">
+          <div v-if="demandes.jours === null" class="space-x-2 text-lg">
             <label> {{ demandes.lieu }} à {{ demandes.date_debuit }}</label>
+          </div>
+          <div v-else class="space-x-2 text-lg">
+            <label>
+              {{ demandes.lieu }} Tous les {{ demandes.jours }} à
+              {{ formatTime(demandes.date_debuit) }}</label
+            >
           </div>
         </div>
         <div class="flex space-x-4 mb-6 text-sm font-medium">
@@ -131,23 +164,30 @@
           Envoyer
         </button>
       </form>
-
-      <div
-        v-for="event in commentaires.slice(0, 8)"
-        :key="event.id"
-        class="ml-6"
-      >
-        <div class=" ">
-          <p class="mb-2 text-lg flex font-semibold text-gray-900 text-left">
-            <img
-              class="rounded-full w-6 h-6"
-              src="../assets/c972ce3d5e2f4ea3d8d0b83ef3423dd1.png"
-              alt=""
-            />
-            <span class="ml-2">{{ event.name }} :</span>
-            <span class="ml-2"> {{ event.content }} </span>
-          </p>
+      <div class="lg:h-96">
+        <div
+          v-for="event in commentaires.slice(0, 5)"
+          :key="event.id"
+          class="ml-6"
+        >
+          <div class=" ">
+            <p class="mb-2 text-lg flex font-semibold text-gray-900 text-left">
+              <img
+                class="rounded-full w-6 h-6"
+                src="../assets/c972ce3d5e2f4ea3d8d0b83ef3423dd1.png"
+                alt=""
+              />
+              <span class="ml-2">{{ event.name }} :</span>
+              <span class="ml-2"> {{ event.content }} </span>
+            </p>
+          </div>
         </div>
+      </div>
+<div class="lg:h-52"></div>
+      <div
+        class="mt-6 w-full max-w-full lg:mt-96 overflow-hidden  shadow-lg"
+      >
+        <div v-html="demandes.maps" class="w-full h-full"></div>
       </div>
     </div>
   </div>
@@ -182,6 +222,20 @@ export default {
     this.getCommentaire();
     this.vue();
   },
+  computed: {
+    currentDay() {
+      const jours = [
+        "Dimanche",
+        "Lundi",
+        "Mardi",
+        "Mercredi",
+        "Jeudi",
+        "Vendredi",
+        "Samedi",
+      ];
+      return jours[new Date().getDay()];
+    },
+  },
 
   methods: {
     redirectToDemandes(id) {
@@ -195,6 +249,12 @@ export default {
         if (response.data) {
           this.demandes = response.data.data;
           this.phoneNumber = this.demandes.telephone;
+          if (this.demandes.maps) {
+            this.demandes.maps = this.demandes.maps.replace(
+              /width="\d+"/,
+              'width="100%"'
+            );
+          }
         }
       } catch (error) {
         console.log(error.data);
@@ -293,9 +353,23 @@ export default {
       const today = new Date().toISOString().split("T")[0]; // Date du jour (AAAA-MM-JJ)
       const eventDate = this.parseDateToISO(date_debuit); // Formate correctement la date
       if (!eventDate) return "Date invalide"; // Si la date est invalide
-      if (today === eventDate) return "En cours";
+      if (today === eventDate) return "Aujourd'hui";
       if (eventDate > today) return "À venir";
       return "Terminé";
+    },
+    formatTime(dateString) {
+      if (!dateString) return "—"; // Affiche un tiret si vide
+
+      const date = new Date(dateString);
+
+      if (isNaN(date)) return "Date invalide"; // Vérifie que la date est valide
+
+      const options = {
+        hour: "2-digit",
+        minute: "2-digit",
+      };
+
+      return new Intl.DateTimeFormat("fr-FR", options).format(date);
     },
   },
 };

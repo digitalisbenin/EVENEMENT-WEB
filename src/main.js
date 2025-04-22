@@ -11,7 +11,7 @@ import TokenService from "./services/storage.service";
 
 Pusher;
 
-ApiService.init("https://evenement.wadounnou.com/");
+ApiService.init("https://api-nouwiwa.api-mon-encadreur.com/");
 if (TokenService.getToken()) {
   ApiService.setHeader();
 }

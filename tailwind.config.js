@@ -14,7 +14,7 @@ module.exports = {
         'Montserrat,Varino',
       //sans: 'Montserrat, Varino',
       sans: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-      serif: 'Montserrat, Varino ',
+      serif: 'Roboto ',
       //mono: 'Montserrat',
       mono: 'Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
 
