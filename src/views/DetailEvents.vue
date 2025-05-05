@@ -90,7 +90,7 @@
             >
           </div>
         </div>
-        <div class="flex space-x-4 mb-6 text-sm font-medium">
+        <div class="lg:flex space-x-4 mb-6 text-sm font-medium">
           <div class="flex-auto flex space-x-4">
             <button
               v-if="demandes.payement === 1"
@@ -106,20 +106,65 @@
             >
               Contacter
             </button>
-          </div>
-          <button
-            class="flex-none flex items-center justify-center w-9 h-9 rounded-md text-red-500 border border-slate-200"
-            type="button"
-            aria-label="Like"
-          >
-            <svg width="20" height="20" fill="currentColor" aria-hidden="true">
+              <button @click="like(demandes.id)" class="flex text-green-500 mt-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="ml-2 h-6 w-6 mt-1"
+            >
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23H5.904m10.598-9.75H14.25M5.904 18.5c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 0 1-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 9.953 4.167 9.5 5 9.5h1.053c.472 0 .745.556.5.96a8.958 8.958 0 0 0-1.302 4.665c0 1.194.232 2.333.654 3.375Z"
               />
             </svg>
+            <p class="ml-1 text-lg">{{ demandes.nbr_likes }}</p>
           </button>
+          </div>
+        <div class=" flex space-x-4 mt-4 lg:mt-0">
+          <!-- <button
+            class="flex text-lg py-2  focus:outline-none poppins rounded-lg transform transition duration-300 hover:scale-105"
+          >
+            Partager:
+          </button> -->
+          
+          <button class="mt-2 focus:outline-none poppins transform transition duration-300 hover:scale-105">
+            <a @click="shareOnWhatsApp(demandes.id)" >
+              <svg
+                style="color: rgb(82, 224, 31)"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
+                class="bi bi-whatsapp ml-4"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"
+                  fill="#52e01f"
+                ></path>
+              </svg>
+            </a>
+          </button>
+          <button class="mt-2 focus:outline-none poppins transform transition duration-300 hover:scale-105">
+            <a @click="shareOnFacebook(demandes.id)"
+              ><svg
+                fill="#1877F2"
+                viewBox="0 0 24 24"
+                class="h-8 w-8 ml-4"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                  clip-rule="evenodd"
+                ></path></svg
+            ></a>
+          </button>
+         </div>
         </div>
       </form>
     </div>
@@ -183,10 +228,8 @@
           </div>
         </div>
       </div>
-<div class="lg:h-52"></div>
-      <div
-        class="mt-6 w-full max-w-full lg:mt-96 overflow-hidden  shadow-lg"
-      >
+      <div class="lg:h-52"></div>
+      <div class="mt-6 w-full max-w-full lg:mt-96 overflow-hidden shadow-lg">
         <div v-html="demandes.maps" class="w-full h-full"></div>
       </div>
     </div>
@@ -210,6 +253,10 @@ export default {
         vue: 1,
         demande_id: "",
       },
+      forme: {
+        description: "1",
+        demande_id: "",
+      },
       demandes: [],
       currentPage: 1,
       itemsPerPage: 5,
@@ -221,6 +268,7 @@ export default {
     this.getdemande();
     this.getCommentaire();
     this.vue();
+    this.like();
   },
   computed: {
     currentDay() {
@@ -258,6 +306,25 @@ export default {
         }
       } catch (error) {
         console.log(error.data);
+      }
+    },
+    async like() {
+      try {
+        this.forme.demande_id = this.$route.params.id;
+        const response = await axios.post("/api/likes", this.forme);
+        if (response.status === 201 || response.status === 200) {
+          this.forme = {};
+          this.getdemande();
+        }
+      } catch (error) {
+        if (error.response.status !== 500) {
+          this.showAlert = true;
+          this.alert.message =
+            "Quelque chose s'est mal passé. Merci d'essayer plus tard !";
+          setTimeout(() => {
+            this.showAlert = false;
+          }, 5000);
+        }
       }
     },
     async getCommentaire() {
@@ -370,6 +437,27 @@ export default {
       };
 
       return new Intl.DateTimeFormat("fr-FR", options).format(date);
+    },
+    shareOnFacebook(id) {
+      const urlToShare = `https://api-nouwiwa.api-mon-encadreur.com/partage/${id}`;
+      const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+        urlToShare
+      )}`;
+      window.open(facebookShareUrl, "_blank");
+    },
+
+    shareOnWhatsApp(id) {
+      // const urlToShare = window.location.href;
+      const urlToShare = `https://api-nouwiwa.api-mon-encadreur.com/partage/${id}`;
+      // const imageUrl = this.demandes.image; // Assurez-vous que l'URL est publique et accessible
+      // const message = `Regarde ceci ! ${urlToShare}\n\nImage: ${imageUrl}`;
+      // const whatsappShareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+      // window.open(whatsappShareUrl, "_blank");
+      // const message = `Découvrez cette image incroyable 👇\n\nhttps://bucetwadounou.s3.us-east-1.amazonaws.com/images/1735833494z.jpeg`;
+      const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(
+        urlToShare
+      )}`;
+      window.open(whatsappUrl, "_blank");
     },
   },
 };
